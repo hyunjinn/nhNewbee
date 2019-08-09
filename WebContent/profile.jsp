@@ -3,6 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+<script src="lib/jquery-1.9.1.js" ></script>
+<script src="lib/jquery-ui.js"></script>
+<script src="lib/jquery-form.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>New User</title>
@@ -12,17 +15,15 @@
 <body>
 <HR>
 
-<div id="mem_title"><img src="img/join_title.gif"></div>
-<form method="post" action="user_control.jsp?action=new">
+<div id="mem_title"></div>
+<form method="post" action="user_control.jsp?action=profile_modify" enctype = "multipart/form-data">
   <ul id="mem_form">
     <li class="row">
       <ul class="item">
         <li class="col1"><img src="img/txt_id.gif"></li>
         <li class="col2">
           <ul>
-            <li><input type="text" name = "uid"></li>
-            <li><img src="img/chk_id.gif"></li>
-            <li>영문, 숫자 조합으로 4~12자 이내</li>
+            <li><input type="text" name="uid" readonly="readonly" style=" background-color:#cccccc"></li>
           </ul>
         </li>
       </ul>
@@ -62,7 +63,7 @@
       </ul>
     </li>
     
-    <li  class="row" id="birthday">
+    <li class="row" id="birthday">
       <ul class="item">
         <li class="col1"><img src="img/txt_birthday.gif"></li>
         <li class="col2">
@@ -106,11 +107,22 @@
         </li>
       </ul>
     </li>
+    
+     <li class="row">
+      <ul class="item">
+        <li class="col1">프로필 사진</li>
+        <li class="col2">
+          <ul>
+            <li><input type="file" name="profile_photo" ></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
    
   </ul> <!-- mem_form -->
 
   <div id="buttons">
-  	<input type = "submit" value ="회원가입" >
+  	<input type = "submit" value ="수정" id="profile_mod_btn" >
   </div>
 </form>
 </body>

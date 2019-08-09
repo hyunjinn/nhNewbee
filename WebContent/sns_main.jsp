@@ -8,22 +8,22 @@
 <meta charset="UTF-8">
 <title>My SNS</title>
 <!-- <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />-->
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-
+<link rel="stylesheet" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="lib/jquery-1.9.1.js" ></script>
+<script src="lib/jquery-ui.js"></script>
+
 <script>
 	$(function() {
 		$("#accordion").accordion({
 			heightStyle : "content",
 			active : parseInt("${curmsg == null ? 0:curmsg}")
 		});
+		$.getScript("js/sns_main.js");
 	});
 
 	function newuser() {
@@ -43,12 +43,14 @@
 		<header>
 			<a href="sns_main.jsp"><img id="logo" src="img/img/logo.png"></a>
 			<nav id="top_menu">HOME | LOGIN | JOIN | NOTICE</nav>
+			<nav>
+			</nav>
 			<nav id="main_menu">
 				<div>
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="javascript:newuser()">New User</a></li>
-						<li><a href="sns_control.jsp?action=getall">전체글보기</a> <%--  	<li><sns:login /></li>  --%>
+						<li><a href="sns_control.jsp?action=getall">전체글보기</a> 
 					</ul>
 				</div>
 			</nav>

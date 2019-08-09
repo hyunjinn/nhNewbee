@@ -65,9 +65,14 @@
 	// 로그아웃
 	else if (action.equals("logout")) {
 		// 세션에 저장된 값 초기화
-		session.removeAttribute("uid");
+		session.removeAttribute("uid"); 
 		//session.removeAttribute("suid");
 		response.sendRedirect("sns_control.jsp?action=getall");
-	}	
+	}
+	else if(action.equals("profile_modify")){
+		// 유저 정보 get
+		// Member member =   
+		pageContext.forward("profile.jsp");
+	}
 %>
 

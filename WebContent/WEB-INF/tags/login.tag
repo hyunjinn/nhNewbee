@@ -9,7 +9,8 @@
 		<li><a href="sns_control.jsp?action=getall&suid=${uid}">${uid}님
 				글 모아보기</a></li>
 		<input type="hidden" name="action" value="logout">
-		<input type="submit" value="로그아웃">
+		<input type="submit" value="로그아웃"> 
+		<input type="button" value="프로필" id="profile_btn">
 	</c:when>
 	<c:otherwise>
 		<!-- <li><a href="#"> :: </a></li>
