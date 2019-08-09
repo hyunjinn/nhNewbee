@@ -74,7 +74,13 @@
 	else if (action.equals("getall")) {
 		ArrayList<MessageSet> datas = msgdao.getAll(mcnt,suid);
 		ArrayList<String> nusers = new MemberDAO().getNewMembers();
-
+		ArrayList<String> beforMember = new MemberDAO().getBeforeBirthMembers(); //이전 생일인 애들 
+		ArrayList<String> birthMember = new MemberDAO().getBirthMembers();
+		ArrayList<String> afterMember = new MemberDAO().getAfterBirthMembers();
+		
+		request.setAttribute("birthMember", birthMember);
+		request.setAttribute("beforMember",beforMember);
+		request.setAttribute("afterMember",afterMember);
 		// 게시글 목록
 		request.setAttribute("datas", datas);
 

@@ -16,7 +16,7 @@ header #top_menu {
 header #main_menu {
     width:757px;
     height:38px;
-    background-image:url("../img/main_menu_bg.png");
+    background-image:url("../img/img/main_menu_bg.png");
     background-repeat:no-repeat;	
     position:absolute;
     top:40px;

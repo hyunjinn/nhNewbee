@@ -101,7 +101,7 @@ public class MemberDAO {
 		ArrayList<String> nmembers = new ArrayList<String>();
 		conn = DBManager.getConnection();
 		// 회원 목록은 7개 까지만 가져옴
-		String sql = "select * from s_member order by date desc limit 0,7";
+		String sql = "select * from s_member order by date desc limit 0,5";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -123,14 +123,97 @@ public class MemberDAO {
 		return nmembers;
 	}
 
-//곧 생일인 친구 불러오기
-	public ArrayList<String> getBirthMembers(){
-		ArrayList<String> nmembers = new ArrayList<String>();
+//지나간 친구 생일 (7일전까지)
+	public ArrayList<String> getBeforeBirthMembers(){
 		conn = DBManager.getConnection();
+		ArrayList<String> beforMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
 		
-		return null;
+		String sql = "select name, birth from s_member where birth is not null " +
+				" and  date_format(now(),'%m%d') - date_format(birth,'%m%d') between 1 and 7 order by birth";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				beforMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Error Code : {}",e.getErrorCode());
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return beforMembers;
 		
+	}
+//생일인 친구들
+	public ArrayList<String> getBirthMembers(){
+		
+		conn = DBManager.getConnection();
+		ArrayList<String> birthMembers = new ArrayList<String>();
+		//회원 목록은 일주일 치만 가져옴 
+		
+		String sql = "select name, birth from s_member where birth is not null" +
+				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				birthMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Error Code : {}",e.getErrorCode());
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return birthMembers;
+	
+		
+	}
+//앞으로 7일동안 생일인 친구들	
+	public ArrayList<String> getAfterBirthMembers(){
+		
+		conn = DBManager.getConnection();
+		ArrayList<String> afterMembers = new ArrayList<String>();
+		//회원 목록은 일주일 치만 가져옴 
+		
+		String sql = "select name, birth " + 
+				"from s_member where birth is not null " + 
+				"and  date_format(now(),'%m%d') - date_format(birth,'%m%d') " + 
+				"between 1 and 7 order by birth";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				afterMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Error Code : {}",e.getErrorCode());
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return afterMembers;
+
 	}
 	
 }
