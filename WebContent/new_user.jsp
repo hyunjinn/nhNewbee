@@ -11,11 +11,11 @@
 
 <body>
 <HR>
-
+ 
 <div id="mem_title"><img src="img/join_title.gif"></div>
-<form method="post" action="user_control.jsp?action=new">
+<form method="post" action="user_control.jsp?action=new" enctype="Multipart/form-data">
   <ul id="mem_form">
-    <li class="row">
+    <li class="row"> 
       <ul class="item">
         <li class="col1"><img src="img/txt_id.gif"></li>
         <li class="col2">
@@ -67,7 +67,7 @@
         <li class="col1"><img src="img/txt_birthday.gif"></li>
         <li class="col2">
           <ul>
-          	<li><input style = "width:80px" type = "test" name = "birth" placeholder="ex)19940813"></li>
+          	<li><input style = "width:80px" type = "input" name = "birth" placeholder="ex)19940813"></li>
             <li><input style="width:10px" type="radio" checked></li>
             <li>음력&nbsp;</li>
             <li><input style="width:10px" type="radio" ></li>
@@ -102,6 +102,17 @@
                 <option value = "독서">독서</option>
               </select>
             </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    
+    <li class="row">
+      <ul class="item">
+        <li class="col1">프로필 사진</li> 
+        <li class="col2">
+          <ul>
+            <li><input type="file" name="profile" ></li>
           </ul>
         </li>
       </ul>

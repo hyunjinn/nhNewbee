@@ -31,7 +31,7 @@ public class MemberDAO {
 	 */
 	public boolean addMember(Member member) {
 		conn = DBManager.getConnection();
-		String sql = "insert into s_member(name, uid, passwd, email,date, hobby, birth) values(?,?,?,?,now(),?,?)";
+		String sql = "insert into s_member(name, uid, passwd, email,date, hobby, birth, profile_photo_path) values(?,?,?,?,now(),?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getName());
@@ -40,8 +40,8 @@ public class MemberDAO {
 			pstmt.setString(4, member.getEmail());
 //추가			
 			pstmt.setString(5, member.getHobby());
-//			pstmt.setString(6, member.getHobby());
 			pstmt.setString(6, member.getBirth());
+			pstmt.setString(7, member.getProfilePhotoPath());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -159,7 +159,7 @@ public class MemberDAO {
 		ArrayList<String> birthMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
 		
-		String sql = "select name, birth from s_member where birth is not null" +
+		String sql = "select name, birth from s_member where birth is not null " +
 				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -28,6 +28,8 @@ public class Member {
 
 	private String birth;
 	
+	private String profilePhotoPath;
+	
 	public String getBirth() {
 		return birth;
 	}
@@ -83,4 +85,14 @@ public class Member {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public String getProfilePhotoPath() {
+		return profilePhotoPath;
+	}
+	public void setProfilePhotoPath(String profilePhotoPath) {
+		this.profilePhotoPath = profilePhotoPath;
+	}
+	
+	
+	
+	
 }

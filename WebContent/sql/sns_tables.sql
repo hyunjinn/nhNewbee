@@ -1,3 +1,4 @@
+/*
 CREATE TABLE `s_member` (
   `uid` varchar(10) NOT NULL,
   `name` varchar(15) NOT NULL,
@@ -6,6 +7,20 @@ CREATE TABLE `s_member` (
   `date` datetime NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*/
+
+CREATE TABLE `s_member` (
+  `uid` varchar(10) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `passwd` varchar(12) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `hobby` varchar(15) DEFAULT NULL,
+  `birth` date DEFAULT NULL,
+  `profile_photo_path` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `s_message` (
   `mid` int(11) NOT NULL AUTO_INCREMENT,

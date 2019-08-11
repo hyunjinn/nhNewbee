@@ -113,7 +113,7 @@
         <li class="col1">프로필 사진</li>
         <li class="col2">
           <ul>
-            <li><input type="file" name="profile_photo" ></li>
+            <li><input type="file" name="profile" ></li>
           </ul>
         </li>
       </ul>
