@@ -44,8 +44,7 @@
 		    if( ! isDirectoryExist ){
 		    	new File(uploadPath).mkdir();
 		    }
-		    String filePath = uploadPath + File.separator + fileName ;
-		    member.setProfilePhotoPath( filePath );
+		    member.setProfilePhotoPath( fileName );
 		}catch(Exception e){ 
 		    e.printStackTrace();
 		}
@@ -68,7 +67,9 @@
 <%
 	// 컨트롤러 요청 action 코드값
 	String action = request.getParameter("action");
-	//String uploadPath= "C:" +  File.separator + "nhSnsImageUpload";
+	//  로컬에 저장하는것은 자유지만 보안 상 읽어들일 수는 없음
+	// 하단 참조 후, http://127.0.0.1:8887/이미지명 를 통해 읽어온다 
+	//  chrome-> Web Server for Chrome 확장프로그램 설치 후 폴더를  realpath로 지정 ex)C:/Users/user/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/mysns2/upload 
 	String uploadPath= request.getRealPath("/upload");
 	// 한번에 올릴 수 있는 파일 용량 : 10M로 제한
 	int size = 10*1024*1024;

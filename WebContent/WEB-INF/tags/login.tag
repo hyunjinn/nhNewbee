@@ -7,7 +7,7 @@
 	<c:when test="${uid != null}">
 		<!-- 	<li><a href="#"> :: </a></li> -->
 			<li>
-				<img src="${profilePhotoPath}" width="100px" height="100px" />
+				<img src="<c:url value='${fileUploadPath}${profilePhotoPath}' />" width="100px" height="100px" />
 			</li> 
 		<li>
 			<a href="sns_control.jsp?action=getall&suid=${uid}">${uid}님  환영합니다!</a>

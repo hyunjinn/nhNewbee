@@ -83,7 +83,7 @@
 		</header>
 
 		<aside>
-			<article id="login_box">
+			<article id="login_box" style="height: 170px;">
 				<img id="login_title" src="img/img/ttl_login.png">
 				<div id="input_button">
 					<ul id="login_input">

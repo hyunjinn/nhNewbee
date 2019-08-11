@@ -96,7 +96,7 @@
 		// 신규 회원 목록
 		request.setAttribute("nusers", nusers);
 
-		// 특정 회원 only 인 경우 회원 uid 를 request  scope 에 저장
+		// 특정 회원 only 인 경우 회원 uid 를 request  scope 에 저장 
 		request.setAttribute("suid", suid);
 
 		// 현재 페이지 카운트 정보 저장
