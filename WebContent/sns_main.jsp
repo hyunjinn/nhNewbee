@@ -43,9 +43,7 @@
 		<header>
 			<a href="sns_main.jsp"><img id="logo" src="img/img/logo.png"></a>
 			<nav id="top_menu">HOME | LOGIN | JOIN | NOTICE</nav>
-			<nav>
-			</nav>
-			<nav id="main_menu">
+			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
 						<li><a href="#">Home</a></li>
@@ -70,16 +68,48 @@
 				<div class="clear"></div>
 
 			</article>
+<!-- 생일인 친구 -->
 			<article id="guestbook">
 				<div id="guestbook_title">
-					<img src="img/img/ttl_memo.gif">
+					<h3>오늘 생일인 친구</h3>
 				</div>
-				<ul>
-					<li>안녕하세요!</li>
-					<li>안녕하세요!</li>
-					<li>안녕하세요!</li>
-					<li>안녕하세요!</li>
-				</ul>
+
+				<c:forEach items="${birthMember}" var="n">
+					<ul>
+						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+					</ul>
+				</c:forEach>
+				<div id="guestbook_title">
+					<h3>남은 친구 생일</h3>
+				</div>
+
+				<c:forEach items="${beforMember}" var="n">
+					<ul>
+						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+					</ul>
+				</c:forEach>
+				<div id="guestbook_title">
+					<h3>지나간 친구 생일</h3>
+				</div>
+
+				<c:forEach items="${afterMember}" var="n">
+					<ul>
+						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+					</ul>
+				</c:forEach>
+			</article>
+<!--End birth-->			
+				<article id="guestbook">
+				<div id="guestbook_title">
+					<!-- <img src="img/img/ttl_memo.gif"> -->
+					<h3>새로 가입한 친구들</h3>
+				</div>
+
+				<c:forEach items="${nusers}" var="n">
+					<ul>
+						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+					</ul>
+				</c:forEach>
 			</article>
 		</aside>
 		<!-- 왼쪽 Aside 끝 -->
@@ -88,14 +118,16 @@
 		<div>
 			<section id="main">
 				<section id="content">
-					<b>내소식 업데이트</b>
+				<img src="img/img/main_img.png">
+					<b style="color: red;margin-left: 40%;font-size: 20px;">내소식 업데이트</b>
 					<form class="m_form" method="post"
 						action="sns_control.jsp?action=newmsg">
 						<input type="hidden" name="uid" value="${uid}">
 						<sns:write type="msg" />
-						<button class="submit" type="submit">등록</button>
+						<button class="submit" type="submit" >등록</button>
 					</form>
-					<br> <br>
+					
+					<br> 	<HR><br><br>
 
 					<h3>친구들의 최신 소식</h3>
 					<div id="accordion">
@@ -135,30 +167,6 @@
 					</div>
 
 				</section>
-				<aside id="sidebar2">
-					<!-- sidebar2 -->
-					<h2>새로운 친구들.!!</h2>
-					<c:forEach items="${nusers}" var="n">
-						<ul>
-							<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
-						</ul>
-					</c:forEach>
-
-					<br> <br>
-					<h3>We're Social Too!!</h3>
-					<img src="img/facebook_32.png"> <img src="img/twitter_32.png">
-					<img src="img/youtube_32.png"> <br> <br> <br>
-					<br>
-
-					<h3>Links</h3>
-					<ul>
-						<li><a href="#">한빛미디어</a></li>
-						<li><a href="#">가천대학교</a></li>
-						<li><a href="#">가천대학교 길병원</a></li>
-					</ul>
-
-				</aside>
-				<!-- end of sidebar -->
 			</section>
 		</div>
 
