@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/footer.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
-<script src="lib/jquery-1.9.1.js" ></script>
+<script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
 
 <script>
@@ -42,13 +42,38 @@
 	<div id="wrap">
 		<header>
 			<a href="sns_main.jsp"><img id="logo" src="img/img/logo.png"></a>
-			<nav id="top_menu">HOME | LOGIN | JOIN | NOTICE</nav>
+			<nav id="top_menu">
+				<div >
+					<ul>
+					<c:choose>
+						<c:when test="${uid == null}">
+							<li >
+								<a style="margin-left: 100px;" href="sns_control.jsp?action=getall">HOME</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li style="display: inline;">
+								<a href="sns_control.jsp?action=getall">HOME</a>
+							</li>
+							<li style="display: inline;">|</li>
+							<li style="display: inline;">
+								<a href="javascript:window.open('sns_control.jsp?action=profile_list', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')">Profile</a>
+							</li>
+							<li style="display: inline;">|</li>
+							<li style="display: inline;">
+								<a href="user_control.jsp?action=logout">LogOut</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					</ul>
+				</div>
+			</nav>
 			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="javascript:newuser()">New User</a></li>
-						<li><a href="sns_control.jsp?action=getall">전체글보기</a> 
+						<li><a href="sns_control.jsp?action=getall">전체글보기</a>
 					</ul>
 				</div>
 			</nav>
@@ -68,7 +93,7 @@
 				<div class="clear"></div>
 
 			</article>
-<!-- 생일인 친구 -->
+			<!-- 생일인 친구 -->
 			<article id="guestbook">
 				<div id="guestbook_title">
 					<h3>오늘 생일인 친구</h3>
@@ -98,8 +123,8 @@
 					</ul>
 				</c:forEach>
 			</article>
-<!--End birth-->			
-				<article id="guestbook">
+			<!--End birth-->
+			<article id="guestbook">
 				<div id="guestbook_title">
 					<!-- <img src="img/img/ttl_memo.gif"> -->
 					<h3>새로 가입한 친구들</h3>
@@ -118,16 +143,20 @@
 		<div>
 			<section id="main">
 				<section id="content">
-				<img src="img/img/main_img.png">
-					<b style="color: red;margin-left: 40%;font-size: 20px;">내소식 업데이트</b>
+					<img src="img/img/main_img.png"> <b
+						style="color: red; margin-left: 40%; font-size: 20px;">내소식
+						업데이트</b>
 					<form class="m_form" method="post"
 						action="sns_control.jsp?action=newmsg">
 						<input type="hidden" name="uid" value="${uid}">
 						<sns:write type="msg" />
-						<button class="submit" type="submit" >등록</button>
+						<button class="submit" type="submit">등록</button>
 					</form>
-					
-					<br> 	<HR><br><br>
+
+					<br>
+					<HR>
+					<br>
+					<br>
 
 					<h3>친구들의 최신 소식</h3>
 					<div id="accordion">
