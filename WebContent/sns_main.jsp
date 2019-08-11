@@ -95,15 +95,16 @@
 			</article>
 			<!-- 생일인 친구 -->
 			<article id="guestbook">
+			
 				<div id="guestbook_title">
 					<h3>오늘 생일인 친구</h3>
 				</div>
-
 				<c:forEach items="${birthMember}" var="n">
 					<ul>
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
+				
 				<div id="guestbook_title">
 					<h3>남은 친구 생일</h3>
 				</div>
@@ -113,15 +114,28 @@
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
+				
 				<div id="guestbook_title">
 					<h3>지나간 친구 생일</h3>
 				</div>
-
 				<c:forEach items="${afterMember}" var="n">
 					<ul>
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
+				
+				
+				<c:if test="${ hobby != null}">
+					<div id="guestbook_title">
+						<h3>같은 취미를 가진 친구들</h3>
+					</div>
+					<c:forEach items="${sameHobbyUserList}" var="member">
+						<ul>
+							<li><a href="sns_control.jsp?action=getall&suid=${member.uid}">${member.uid}</a></li>
+						</ul>
+					</c:forEach>
+				</c:if>
+				
 			</article>
 			<!--End birth-->
 			<article id="guestbook">

@@ -73,14 +73,23 @@
 	// 전체 게시글 가져오기
 	else if (action.equals("getall")) {
 		ArrayList<MessageSet> datas = msgdao.getAll(mcnt, suid);
-		ArrayList<String> nusers = new MemberDAO().getNewMembers();
-		ArrayList<String> beforMember = new MemberDAO().getBeforeBirthMembers(); //이전 생일인 애들 
-		ArrayList<String> birthMember = new MemberDAO().getBirthMembers();
-		ArrayList<String> afterMember = new MemberDAO().getAfterBirthMembers();
+		MemberDAO memberDao = new MemberDAO();
+		ArrayList<String> nusers = memberDao.getNewMembers();
+
+		String hobby = (String)(session.getAttribute("hobby"));
+		//취미 리스트
+		ArrayList<Member> sameHobbyUserList = memberDao.getSameHobbyUsers(hobby);
 		
+		//생일 관련 
+		ArrayList<String> beforMember = memberDao.getBeforeBirthMembers(); 
+		ArrayList<String> birthMember = memberDao.getBirthMembers();
+		ArrayList<String> afterMember = memberDao.getAfterBirthMembers();
 		request.setAttribute("birthMember", birthMember);
 		request.setAttribute("beforMember",beforMember);
 		request.setAttribute("afterMember",afterMember);
+
+		//취미 리스트
+		request.setAttribute("sameHobbyUserList", sameHobbyUserList);
 		// 게시글 목록
 		request.setAttribute("datas", datas);
 

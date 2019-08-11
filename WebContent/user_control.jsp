@@ -97,9 +97,11 @@
 
 	// 로그인
 	else if (action.equals("login")) {
-		if (mdao.login(member.getUid(), member.getPasswd())) {
+		if (mdao.login(member)) { 
 			// 로그인 성공시 세션에 "uid" 저장
 			session.setAttribute("uid", member.getUid());
+			session.setAttribute("hobby",member.getHobby());
+			session.setAttribute("profilePhotoPath",member.getProfilePhotoPath() );
 			response.sendRedirect("sns_control.jsp?action=getall");
 		} else {
 			out.println("<script>alert('아이디나 비밀번호가 틀렸습니다.!!');history.go(-1);</script>");

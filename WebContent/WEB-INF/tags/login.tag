@@ -6,11 +6,12 @@
 <c:choose>
 	<c:when test="${uid != null}">
 		<!-- 	<li><a href="#"> :: </a></li> -->
-		<li><a href="sns_control.jsp?action=getall&suid=${uid}">${uid}님
-				글 모아보기</a></li>
-		<input type="hidden" name="action" value="logout">
-		<input type="submit" value="로그아웃"> 
-		<input type="button" value="프로필" id="profile_btn">
+		<li>
+			<a href="sns_control.jsp?action=getall&suid=${uid}">${uid}님  환영합니다!</a>
+		</li>
+		<li>
+			
+		</li>
 	</c:when>
 	<c:otherwise>
 		<!-- <li><a href="#"> :: </a></li>

@@ -9,7 +9,7 @@ import java.util.Date;
  *
  */
 public class Member {	
-	// 회원 이름
+	// 회원 이름 
 	private String name;
 	
 	// 회원 아이디(로그인용)
@@ -23,7 +23,8 @@ public class Member {
 	
 	// 가입일
 	private Date date;
-//추가 
+	
+	//추가 
 	private String hobby; 	
 
 	private String birth;
