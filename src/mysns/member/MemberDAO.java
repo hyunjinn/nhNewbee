@@ -17,13 +17,13 @@ import mysns.util.*;
  *
  */
 public class MemberDAO {
-	
+
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
+
 	Logger logger = LoggerFactory.getLogger(MemberDAO.class);
-	
+
 	/**
 	 * 신규 회원 등록
 	 * @param member
@@ -31,18 +31,18 @@ public class MemberDAO {
 	 */
 	public boolean addMember(Member member) {
 		conn = DBManager.getConnection();
-		String sql = "insert into s_member(name, uid, passwd, email,date, hobby, birth) values(?,?,?,?,now(),?,?)";
+		String sql = "insert into s_member(name, uid, passwd, email,date, hobby, birth, profile_photo_path) values(?,?,?,?,now(),?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getUid());
 			pstmt.setString(3, member.getPasswd());
 			pstmt.setString(4, member.getEmail());
-//추가			
+			//추가			
 			pstmt.setString(5, member.getHobby());
-//			pstmt.setString(6, member.getHobby());
 			pstmt.setString(6, member.getBirth());
-			
+			pstmt.setString(7, member.getProfilePhotoPath());
+
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,26 +59,31 @@ public class MemberDAO {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 회원 로그인
 	 * @param uid
 	 * @param passwd
 	 * @return
 	 */
-	public boolean login(String uid, String passwd) {
+	public boolean login(Member member) {
+		String uid = member.getUid();
+		String passwd = member.getPasswd();
 		conn = DBManager.getConnection();
-		String sql = "select uid, passwd from s_member where uid = ?";
+		String sql = "select uid, passwd, hobby,profile_photo_path from s_member where uid = ?";
 		boolean result = false;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uid);
 			rs = pstmt.executeQuery();
 			rs.next();
-			if(rs.getString("passwd").equals(passwd))
+			if(rs.getString("passwd").equals(passwd) ) {
+				member.setHobby(rs.getString("hobby"));
+				member.setProfilePhotoPath(rs.getString("profile_photo_path"));
 				result=true;
-		} catch (SQLException e) {
+			}
+		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -92,7 +97,7 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 메인화면 우측 신규회원 목록
 	 * @return
@@ -123,12 +128,12 @@ public class MemberDAO {
 		return nmembers;
 	}
 
-//지나간 친구 생일 (7일전까지)
+	//지나간 친구 생일 (7일전까지)
 	public ArrayList<String> getBeforeBirthMembers(){
 		conn = DBManager.getConnection();
 		ArrayList<String> beforMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
-		
+
 		String sql = "select name, birth from s_member where birth is not null " +
 				" and  date_format(now(),'%m%d') - date_format(birth,'%m%d') between 1 and 7 order by birth";
 		try {
@@ -150,16 +155,16 @@ public class MemberDAO {
 			}
 		}
 		return beforMembers;
-		
+
 	}
-//생일인 친구들
+	//생일인 친구들
 	public ArrayList<String> getBirthMembers(){
-		
+
 		conn = DBManager.getConnection();
 		ArrayList<String> birthMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
-		
-		String sql = "select name, birth from s_member where birth is not null" +
+
+		String sql = "select name, birth from s_member where birth is not null " +
 				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -180,16 +185,16 @@ public class MemberDAO {
 			}
 		}
 		return birthMembers;
-	
-		
+
+
 	}
-//앞으로 7일동안 생일인 친구들	
+	//앞으로 7일동안 생일인 친구들	
 	public ArrayList<String> getAfterBirthMembers(){
-		
+
 		conn = DBManager.getConnection();
 		ArrayList<String> afterMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
-		
+
 		String sql = "select name, birth " + 
 				"from s_member where birth is not null " + 
 				"and  date_format(now(),'%m%d') - date_format(birth,'%m%d') " + 
@@ -215,6 +220,36 @@ public class MemberDAO {
 		return afterMembers;
 
 	}
-	
+
+
+	// 취미가 같은 친구들 목록 
+	public ArrayList<Member> getSameHobbyUsers(String hobby){
+
+		conn = DBManager.getConnection();
+
+		String sql = "select uid, name, hobby from s_member where hobby = ?" ;
+		ArrayList<Member> rlist = new ArrayList<Member>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, hobby);
+
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+
+				Member m = new Member();
+				m.setHobby(rs.getString("hobby"));
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+
+				rlist.add(m);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rlist; 
+	}
+
 }
 
