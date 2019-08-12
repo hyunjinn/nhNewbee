@@ -7,6 +7,7 @@
 <script src="lib/jquery-ui.js"></script>
 <script src="lib/jquery-form.js"></script>
 <script src="js/profile.js"></script>
+<script src="js/file_upload.js"></script>
 <script>
 <% 
 Member member = (Member)request.getAttribute("member");
@@ -16,6 +17,7 @@ var file_upload_path = "<%=session.getAttribute("fileUploadPath") + member.getPr
 
 $(function() {
 	new Profile(hobby, file_upload_path);
+	bindUploadFileEvent( $("#file_upload"), $("#image_holder"),  $("#image_holder_li"));
 });
 
 </script>
