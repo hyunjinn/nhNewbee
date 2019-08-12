@@ -279,6 +279,38 @@ public class MemberDAO {
 		}
 		return null;
 	}
+	
+	// 프로필 수정
+	public boolean updateMemberInfo(Member member) {
+		conn = DBManager.getConnection();
+		String sql = "update s_member set name = ? , passwd = ?, email = ? , hobby = ?, birth = ?, profile_photo_path = ?"
+				+ " where uid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getPasswd());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getHobby());
+			pstmt.setString(5, member.getBirth());
+			pstmt.setString(6, member.getProfilePhotoPath());
+			pstmt.setString(7, member.getUid());
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Error Code : {}",e.getErrorCode());
+			return false;
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
 
 }
 

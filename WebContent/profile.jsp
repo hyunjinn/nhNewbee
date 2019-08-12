@@ -38,7 +38,7 @@ $(function() {
         <li class="col1"><img src="img/txt_id.gif"></li>
         <li class="col2">
           <ul>
-            <li><input type="text" name="uid" readonly="readonly" style=" background-color:#cccccc" value="${member.uid}" }></li>
+            <li><input type="text" name="uid" readonly="readonly" style=" background-color:#cccccc" value="${member.uid}"}></li>
           </ul>
         </li>
       </ul>
