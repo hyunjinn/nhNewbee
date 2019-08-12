@@ -92,8 +92,7 @@
 		request.setAttribute("sameHobbyUserList", sameHobbyUserList);
 		// 게시글 목록
 		request.setAttribute("datas", datas);
-		request.setAttribute("datasSize", datas.size());
-
+		
 		// 신규 회원 목록
 		request.setAttribute("nusers", nusers);
 
@@ -117,5 +116,14 @@
 		Member member = memberDao.getMemberByUid(uid);
 		request.setAttribute("member", member);
 		pageContext.forward("profile.jsp");
+	}
+	// 메세지 뷰
+	else if( action.equals("message_view") ){
+		String mid = request.getParameter("mid");
+		MessageSet messageSet = msgdao.getMessageSet(mid);
+		
+		// 게시글 목록
+		request.setAttribute("messageSet", messageSet);
+		pageContext.forward("message_view.jsp");
 	}
 %>

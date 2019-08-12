@@ -21,7 +21,7 @@ CREATE TABLE `s_member` (
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+/*
 CREATE TABLE `s_message` (
   `mid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(15) NOT NULL,
@@ -31,6 +31,18 @@ CREATE TABLE `s_message` (
   `date` datetime NOT NULL,
   PRIMARY KEY (`mid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*/
+CREATE TABLE `s_message` (
+  `mid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(15) NOT NULL,
+  `msg` varchar(100) NOT NULL,
+  `favcount` int(11) DEFAULT '0',
+  `replycount` int(11) DEFAULT '0',
+  `date` datetime NOT NULL,
+  `photo_path` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`mid`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `s_reply` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,

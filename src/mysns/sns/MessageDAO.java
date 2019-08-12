@@ -77,6 +77,66 @@ public class MessageDAO {
 		return datas;
 	}
 	
+	// 특정 메시지에 연관된 메시지, 댓글 목록 
+	public MessageSet getMessageSet(String mid) {
+		conn = DBManager.getConnection();
+		String sql;
+		MessageSet ms = new MessageSet();
+		try {
+			// 특정 회원 게시물 only 인 경우
+			sql = "select * from s_message where mid=? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,mid);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Message m = new Message();
+				ArrayList<Reply> rlist = new ArrayList<Reply>();
+				
+				m.setMid(rs.getInt("mid"));
+				m.setMsg(rs.getString("msg"));
+				m.setDate(rs.getDate("date")+" / "+rs.getTime("date"));
+				m.setFavcount(rs.getInt("favcount"));
+				m.setUid(rs.getString("uid"));
+				m.setPhotoPath(rs.getString("photo_path"));
+				
+				String rsql = "select *  from s_reply where mid=? order by date desc";
+				pstmt = conn.prepareStatement(rsql);
+				pstmt.setInt(1,rs.getInt("mid"));
+				ResultSet rrs = pstmt.executeQuery();
+				while(rrs.next()) {
+					Reply r = new Reply();
+					r.setRid(rrs.getInt("rid"));
+					r.setUid(rrs.getString("uid"));
+					r.setRmsg(rrs.getString("rmsg"));
+					r.setDate(rrs.getDate("date")+"/"+rrs.getTime("date"));
+					rlist.add(r);
+				}
+				rrs.last();
+				m.setReplycount(rrs.getRow());
+				//System.out.println("r count"+rrs.getRow());
+				
+				ms.setMessage(m);
+				ms.setRlist(rlist);
+				rrs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getErrorCode());
+		}
+		finally {
+			try {
+				//rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getErrorCode());
+			}
+		}		
+		return ms;
+	}
+	
 	public ArrayList<MessageSet> getAll(int cnt, String suid) {
 		ArrayList<MessageSet> datas = new ArrayList<MessageSet>();
 		conn = DBManager.getConnection();
