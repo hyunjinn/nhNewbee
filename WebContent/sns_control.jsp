@@ -85,8 +85,8 @@
 		ArrayList<String> birthMember = memberDao.getBirthMembers();
 		ArrayList<String> afterMember = memberDao.getAfterBirthMembers();
 		request.setAttribute("birthMember", birthMember);
-		request.setAttribute("beforMember",beforMember);
-		request.setAttribute("afterMember",afterMember);
+		request.setAttribute("beforMember", beforMember);
+		request.setAttribute("afterMember", afterMember);
 
 		//취미 리스트
 		request.setAttribute("sameHobbyUserList", sameHobbyUserList);

@@ -128,7 +128,9 @@ public class MemberDAO {
 		return nmembers;
 	}
 
-	//지나간 친구 생일 (7일전까지)
+	//지나간 친구 생일 (7일전까지) 7l'[/ ,;
+	
+	
 	public ArrayList<String> getBeforeBirthMembers(){
 		conn = DBManager.getConnection();
 		ArrayList<String> beforMembers = new ArrayList<String>();
@@ -162,7 +164,6 @@ public class MemberDAO {
 
 		conn = DBManager.getConnection();
 		ArrayList<String> birthMembers = new ArrayList<String>();
-		//회원 목록은 일주일 치만 가져옴 
 
 		String sql = "select name, birth from s_member where birth is not null " +
 				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
@@ -188,7 +189,7 @@ public class MemberDAO {
 
 
 	}
-	//앞으로 7일동안 생일인 친구들	
+	//앞으로 3일동안 생일인 친구들	
 	public ArrayList<String> getAfterBirthMembers(){
 
 		conn = DBManager.getConnection();
@@ -197,8 +198,8 @@ public class MemberDAO {
 
 		String sql = "select name, birth " + 
 				"from s_member where birth is not null " + 
-				"and  date_format(now(),'%m%d') - date_format(birth,'%m%d') " + 
-				"between 1 and 7 order by birth";
+				"and  date_format(now(),'%m%d') - date_format(	birth,'%m%d') " + 
+				"between 1and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
