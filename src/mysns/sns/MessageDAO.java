@@ -26,6 +26,57 @@ public class MessageDAO {
 	ResultSet rs;
 	Logger logger = LoggerFactory.getLogger(MemberDAO.class);
 	
+	public ArrayList<MessageSet> getMsgList(int cnt, String suid) {
+		ArrayList<MessageSet> datas = new ArrayList<MessageSet>();
+		conn = DBManager.getConnection();
+		String sql;
+
+		try {
+			// 전체 게시물인 경우
+			if((suid == null) || (suid.equals(""))) {
+				sql = "select * from s_message order by date desc limit 0,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, cnt);
+			}
+			// 특정 회원 게시물 only 인 경우
+			else{
+				sql = "select * from s_message where uid=? order by date desc limit 0,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,suid);
+				pstmt.setInt(2,cnt);
+			}
+
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MessageSet ms = new MessageSet();
+				Message m = new Message();
+				
+				m.setMid(rs.getInt("mid"));
+				m.setMsg(rs.getString("msg"));
+				m.setDate(rs.getDate("date")+" / "+rs.getTime("date"));
+				m.setFavcount(rs.getInt("favcount"));
+				m.setUid(rs.getString("uid"));
+				m.setPhotoPath(rs.getString("photo_path"));
+				ms.setMessage(m);
+				datas.add(ms);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getErrorCode());
+		}
+		finally {
+			try {
+				//rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println(e.getErrorCode());
+			}
+		}		
+		return datas;
+	}
+	
 	public ArrayList<MessageSet> getAll(int cnt, String suid) {
 		ArrayList<MessageSet> datas = new ArrayList<MessageSet>();
 		conn = DBManager.getConnection();
@@ -57,6 +108,7 @@ public class MessageDAO {
 				m.setDate(rs.getDate("date")+" / "+rs.getTime("date"));
 				m.setFavcount(rs.getInt("favcount"));
 				m.setUid(rs.getString("uid"));
+				m.setPhotoPath(rs.getString("photo_path"));
 				
 				String rsql = "select *  from s_reply where mid=? order by date desc";
 				pstmt = conn.prepareStatement(rsql);

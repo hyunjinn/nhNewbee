@@ -25,6 +25,9 @@ public class Message {
 	// 댓글 갯수
 	private int replycount;
 	
+	// 업로드 사진 경로
+	private String photoPath;
+	
 	public int getMid() {
 		return mid;
 	}
@@ -72,5 +75,15 @@ public class Message {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+	
+	
 	
 }

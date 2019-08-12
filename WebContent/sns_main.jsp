@@ -171,7 +171,7 @@
 		<div>
 			<section id="main">
 				<section id="content">
-					<!-- 
+					<!-- 1. 등록하기
 					<img src="img/img/main_img.png"> 
 					<b style="color: red; margin-left: 40%; font-size: 20px;">내소식
 						업데이트</b>
@@ -183,9 +183,11 @@
 					</form>
 					 -->
 
+					<!-- 2. 리스트
 					<br>
 					<HR>
 					<br> <br>
+
 
 					<h3>친구들의 최신 소식</h3>
 					<div id="accordion">
@@ -219,10 +221,31 @@
 							</div>
 						</c:forEach>
 					</div>
-
+					
 					<div align="center">
 						<a href="sns_control.jsp?action=getall&cnt=${cnt+5}&suid=${suid}">더보기&gt;&gt;</a>
 					</div>
+					
+					  -->
+					  
+					 <div class="list">
+						 <ul class="imglist">
+						 	<c:forEach  var="msgs" items="${datas}">
+						 		<c:set var="m" value="${msgs.message}" />
+							 	<li data-idx="${m.mid}" >
+							 		<a>
+							 			<p class="thumb">
+							 				<img src= "${fileUploadPath}${m.photoPath}" />
+							 			</p>
+							 			<p class="game_tit"> ${m.uid} / ${m.date} </p>
+							 		</a>
+							 	</li>
+						 	</c:forEach>
+						 </ul>
+					 </div>
+					<p class="img_more">
+						<button type="button" id="more" onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
+					</p>
 
 				</section>
 			</section>
