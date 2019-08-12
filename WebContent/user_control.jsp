@@ -86,6 +86,7 @@
 		} else if (!checkBirth(birth)) {
 			out.println("<script>alert('생년 월일을 다시 입력하세요. ex)19940813');history.go(-1);</script>");
 		} else {
+			System.out.println(uploadPath);
 			member = memberSetByyMultipareRequest(multipartRequest);
 			uplaodFile(multipartRequest, member, uploadPath);
 			if (mdao.addMember(member) ) {

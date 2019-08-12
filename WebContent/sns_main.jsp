@@ -35,39 +35,52 @@
 	}
 </script>
 
+<style>
+</style>
+
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
 <body>
+	<!--  -->
 	<div id="wrap">
 		<header>
-			<a href="sns_main.jsp"><img id="logo" src="img/img/logo.png"></a>
+			<!--  <a href="sns_main.jsp"> <img id="logo" src="img/img/logo.png"> </a> -->
+
 			<nav id="top_menu">
-				<div >
+				<div>
 					<ul>
-					<c:choose>
-						<c:when test="${uid == null}">
-							<li >
-								<a style="margin-left: 100px;" href="sns_control.jsp?action=getall">HOME</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li style="display: inline;">
-								<a href="sns_control.jsp?action=getall">HOME</a>
-							</li>
-							<li style="display: inline;">|</li>
-							<li style="display: inline;">
-								<a href="javascript:window.open('sns_control.jsp?action=profile_list', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')">Profile</a>
-							</li>
-							<li style="display: inline;">|</li>
-							<li style="display: inline;">
-								<a href="user_control.jsp?action=logout">LogOut</a>
-							</li>
-						</c:otherwise>
-					</c:choose>
+						<c:choose>
+							<c:when test="${uid == null}">
+								<li><a style="margin-left: 100px;"
+									href="sns_control.jsp?action=getall">HOME</a></li>
+							</c:when>
+							<c:otherwise>
+								<li style="display: inline;"><a
+									href="sns_control.jsp?action=getall">HOME</a></li>
+								<li style="display: inline;">|</li>
+								<li style="display: inline;"><a
+									href="javascript:window.open('sns_control.jsp?action=profile_list', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')">Profile</a>
+								</li>
+								<li style="display: inline;">|</li>
+								<li style="display: inline;"><a
+									href="user_control.jsp?action=logout">LogOut</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>
 			</nav>
+
+			<div class="section">
+				<div class="section__item">
+					<a href="sns_control.jsp?action=getall"
+						class="sm-link sm-link_padding-all sm-link1" style="top: 35px;">
+						<span class="sm-link__label"
+						style="font-size: 30px; color: #494902;">&nbsp;FACEBOOK&nbsp;</span>
+					</a>
+				</div>
+			</div>
+			
 			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
@@ -95,7 +108,7 @@
 			</article>
 			<!-- 생일인 친구 -->
 			<article id="guestbook">
-			
+
 				<div id="guestbook_title">
 					<h3>오늘 생일인 친구</h3>
 				</div>
@@ -104,7 +117,7 @@
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
-				
+
 				<div id="guestbook_title">
 					<h3>남은 친구 생일</h3>
 				</div>
@@ -114,7 +127,7 @@
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
-				
+
 				<div id="guestbook_title">
 					<h3>지나간 친구 생일</h3>
 				</div>
@@ -123,19 +136,20 @@
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
-				
-				
+
+
 				<c:if test="${ hobby != null}">
 					<div id="guestbook_title">
 						<h3>같은 취미를 가진 친구들</h3>
 					</div>
 					<c:forEach items="${sameHobbyUserList}" var="member">
 						<ul>
-							<li><a href="sns_control.jsp?action=getall&suid=${member.uid}">${member.uid}</a></li>
+							<li><a
+								href="sns_control.jsp?action=getall&suid=${member.uid}">${member.uid}</a></li>
 						</ul>
 					</c:forEach>
 				</c:if>
-				
+
 			</article>
 			<!--End birth-->
 			<article id="guestbook">
@@ -169,8 +183,7 @@
 
 					<br>
 					<HR>
-					<br>
-					<br>
+					<br> <br>
 
 					<h3>친구들의 최신 소식</h3>
 					<div id="accordion">
@@ -262,7 +275,7 @@
 
 				</section>
 				<!-- end of footer-area -->
-			</div>
 		</footer>
+	</div>
 </body>
 </html>
