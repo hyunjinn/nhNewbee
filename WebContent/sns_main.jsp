@@ -157,8 +157,9 @@
 		<div>
 			<section id="main">
 				<section id="content">
-					<img src="img/img/main_img.png"> <b
-						style="color: red; margin-left: 40%; font-size: 20px;">내소식
+					<!-- 
+					<img src="img/img/main_img.png"> 
+					<b style="color: red; margin-left: 40%; font-size: 20px;">내소식
 						업데이트</b>
 					<form class="m_form" method="post"
 						action="sns_control.jsp?action=newmsg">
@@ -166,6 +167,7 @@
 						<sns:write type="msg" />
 						<button class="submit" type="submit">등록</button>
 					</form>
+					 -->
 
 					<br>
 					<HR>
