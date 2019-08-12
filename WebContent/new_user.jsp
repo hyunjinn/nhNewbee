@@ -23,8 +23,7 @@
 	<div id="mem_title">
 		<img src="img/join_title.gif">
 	</div>
-	<form method="post" action="user_control.jsp?action=new"
-		enctype="Multipart/form-data">
+	<form method="post" action="user_control.jsp?action=new" enctype="Multipart/form-data">
 		<ul id="mem_form">
 			<li class="row">
 				<ul class="item">

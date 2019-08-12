@@ -199,7 +199,7 @@ public class MemberDAO {
 		String sql = "select name, birth " + 
 				"from s_member where birth is not null " + 
 				"and  date_format(now(),'%m%d') - date_format(	birth,'%m%d') " + 
-				"between 1and 7 order by birth";
+				"between 1 and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
