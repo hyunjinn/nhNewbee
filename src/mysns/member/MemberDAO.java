@@ -199,7 +199,7 @@ public class MemberDAO {
 		String sql = "select name, birth " + 
 				"from s_member where birth is not null " + 
 				"and  date_format(now(),'%m%d') - date_format(	birth,'%m%d') " + 
-				"between 1and 7 order by birth";
+				"between 1 and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -250,6 +250,67 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return rlist; 
+	}
+	
+	// 프로필용 - 멤버정보 get
+	public Member getMemberByUid(String uid) {
+		conn = DBManager.getConnection();
+
+		String sql = "select * from s_member where uid = ?" ;
+		Member member = new Member();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+
+			ResultSet rs = pstmt.executeQuery();
+			Member m = new Member();
+			while(rs.next()) {
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+				m.setPasswd(rs.getString("passwd"));
+				m.setEmail(rs.getString("email")); 
+				m.setBirth(rs.getString("birth"));
+				m.setHobby(rs.getString("hobby"));
+				m.setProfilePhotoPath(rs.getString("profile_photo_path"));
+			}
+			return m;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// 프로필 수정
+	public boolean updateMemberInfo(Member member) {
+		conn = DBManager.getConnection();
+		String sql = "update s_member set name = ? , passwd = ?, email = ? , hobby = ?, birth = ?, profile_photo_path = ?"
+				+ " where uid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getPasswd());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getHobby());
+			pstmt.setString(5, member.getBirth());
+			pstmt.setString(6, member.getProfilePhotoPath());
+			pstmt.setString(7, member.getUid());
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Error Code : {}",e.getErrorCode());
+			return false;
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 }

@@ -1,43 +1,21 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
+<script src="js/file_upload.js"></script>
 <meta charset="UTF-8">
 <title>New User</title>
 <link rel="stylesheet" href="css/new_user.css" />
 <script>
 	// 파일 업로드 용
 	$(function() {
-		$("#file_upload").on('change', function() {
-			console.log('aa');
-			if (typeof (FileReader) != "undefined") {
-				var image_holder = $("#image_holder");
-				image_holder.empty();
-
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$("<img />", {
-						"src" : e.target.result,
-						"class" : "thumb-image",
-						"width" : "100px",
-						"height" : "100px"
-					}).appendTo(image_holder);
-					$("#image_holder_li").height(100);
-				}
-				image_holder.show();
-				reader.readAsDataURL($(this)[0].files[0]);
-			} else {
-				alert("This browser does not support FileReader.");
-			}
-		});
+		bindUploadFileEvent( $("#file_upload"), $("#image_holder"),  $("#image_holder_li"));
 	});
 </script>
-
 </head>
 <body>
 	<HR>
@@ -45,8 +23,7 @@
 	<div id="mem_title">
 		<img src="img/join_title.gif">
 	</div>
-	<form method="post" action="user_control.jsp?action=new"
-		enctype="Multipart/form-data">
+	<form method="post" action="user_control.jsp?action=new" enctype="Multipart/form-data">
 		<ul id="mem_form">
 			<li class="row">
 				<ul class="item">

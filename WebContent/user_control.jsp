@@ -1,9 +1,5 @@
-<%@page import="mysns.member.Member"%>
-<%@page import="java.io.File"%>
-<%@page import="java.util.UUID"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="mysns.member.Member, java.io.File, java.util.UUID, java.util.Enumeration
+ ,com.oreilly.servlet.multipart.DefaultFileRenamePolicy, com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -116,9 +112,25 @@
 		//session.removeAttribute("suid");
 		response.sendRedirect("sns_control.jsp?action=getall");
 	} else if (action.equals("profile_modify")) {
-		// 유저 정보 get
-		// Member member =   
-		pageContext.forward("profile.jsp");
+		
+		// 파일 업로드를 위한 request, 일반적인 application/x-www-form-urlencoded 방식이 아니기 때문에 multi.getParameter() 형식으로 파라미터를 받아와야한다
+		 MultipartRequest multipartRequest = new MultipartRequest(request,uploadPath,size,"utf-8",new DefaultFileRenamePolicy());
+		 String birth = multipartRequest.getParameter("birth");
+		//1.비밀번호 체크	
+		boolean isSamePasswd = multipartRequest.getParameter("passwd").equals(multipartRequest.getParameter("passwdCheck"));
+		if ( ! isSamePasswd) {
+			out.println("<script>alert('비밀 번호가 일치하지 않습니다. 다시입력하세요!!');history.go(-1);</script>");
+		} else if (!checkBirth(birth)) {
+			out.println("<script>alert('생년 월일을 다시 입력하세요. ex)19940813');history.go(-1);</script>");
+		} else {
+			member = memberSetByyMultipareRequest(multipartRequest);
+			uplaodFile(multipartRequest, member, uploadPath);
+			if (mdao.updateMemberInfo(member) ) {
+				out.println( 
+						"<script>alert('수정 완료됐습니다.');opener.window.location.reload();window.close();</script>");
+			} else
+				out.println("<script>alert('수정 실패');history.go(-1);</script>");
+		}
 	}
 	
 	
