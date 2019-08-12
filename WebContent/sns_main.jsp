@@ -13,9 +13,16 @@
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
-
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <script>
 	$(function() {
@@ -35,9 +42,69 @@
 	}
 </script>
 
-<style>
-</style>
+<script>
+	$(document).ready(function() {
+		$("#modal_show").click(function() {
+			$("#exampleModal").modal("show");
+		});
 
+		$("#close_modal").click(function() {
+			$("#exampleModal").modal("hide");
+		});
+	});
+</script>
+
+<style>
+#uploadBtn {
+	position: fixed;
+	bottom: 0;
+	background-color: #e0eada;
+	width: 970px;
+	text-align: center;
+}
+/* #popup{
+	display:none;
+	position:fixed;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.9);
+}
+#popmenu{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:
+	translate(-50%, -50%);
+	width:300px;
+	height:200px;
+	text-align:center;
+	background:#fff;
+}
+.exit{
+	position:absolute;
+	left:50%;
+	bottom:10px;
+	transform:
+	translate(-50%,0);
+	width:60px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	background:#007AAE;
+	cursor:pointer;
+}
+#popmenu p{
+	margin-top:80px;
+}
+#content{
+	width:300px;
+	height:150px;
+	text-align:center;
+	color:#fff;
+	background:#555;
+	cursor:pointer;
+} */
+</style>
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
@@ -80,13 +147,14 @@
 					</a>
 				</div>
 			</div>
-			
+
 			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="javascript:newuser()">New User</a></li>
 						<li><a href="sns_control.jsp?action=getall">전체글보기</a>
+						<li><a href="">사진업로드</a>
 					</ul>
 				</div>
 			</nav>
@@ -227,6 +295,57 @@
 		</div>
 
 
+		<!-- Button trigger modal -->
+		<!-- <button type="button" class="btn btn-primary" id="modal_show">
+			JQUERY를 이용한 모달 열기</button>
+
+		Modal
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true"
+			style="background-color: yellow;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<form method="post" action="user_control.jsp?action=new"
+							enctype="Multipart/form-data">
+
+							<li>
+								<ul>
+									<li class="col1">업로드 사진</li>
+									<li class="col2">
+										<ul>
+											<li><input type="file" name="ficture" id="file_upload"></li>
+											<li ><div id="image_holder" ></div></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+
+							<div id="buttons">
+								<input type="submit" value="회원가입">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+						<button type="button" class="btn btn-primary" id="close_modal">다른
+							방식으로 모달 닫기</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
 		<footer>
 			<div class="container1">
 				<section id="footer-area">
@@ -274,8 +393,12 @@
 					<!-- end of footer-outer-block -->
 
 				</section>
-				<!-- end of footer-area -->
 		</footer>
+		<div id="uploadBtn">
+			<a href="#" style="font-size: 55px;">+</a>
+		</div>
+
 	</div>
 </body>
 </html>
++
