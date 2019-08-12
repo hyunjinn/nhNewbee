@@ -37,7 +37,7 @@ aside #join_search {
 }
 aside #guestbook {
     width:189px;
-    height:135px;	
+    height:300px;	
     margin-top:15px;
     background-color:#eeeeee;
     border:solid 1px #cccccc;	
@@ -144,4 +144,51 @@ section .items {
 section .items li {
     margin-top:3px;
 }
+
+
+/* 추가 */
+/* #content {
+float: left;
+width: 650px;
+} */
+#sidebar2 {
+float: right;
+padding-right: 15px;
+width: 155px;
+}
+footer{
+	height:130px; /* 200px */
+	clear:both;
+	width:100%;
+	margin:0 auto;
+	background-color:#555;
+	color:#fff;
+}
+/* basics */
+
+h1,h2,h3,h4,h5,h6 {
+font-weight: bold;
+clear: both;
+color: #333;
+}
+
+a:link, a:visited {
+color:#191919;
+text-decoration:none;
+font-size:14px;
+font-weight:bold;
+}
+
+a:hover, a:active {
+color: rgba(5,171,224,1);
+}
+
+p {
+margin-bottom: 18px;
+}
+
+li {
+padding-left: 5px;
+}
+
 
