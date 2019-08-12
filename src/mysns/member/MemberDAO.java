@@ -250,6 +250,35 @@ public class MemberDAO {
 		}
 		return rlist; 
 	}
+	
+	// 프로필용 - 멤버정보 get
+	public Member getMemberByUid(String uid) {
+		conn = DBManager.getConnection();
+
+		String sql = "select * from s_member where uid = ?" ;
+		Member member = new Member();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+
+			ResultSet rs = pstmt.executeQuery();
+			Member m = new Member();
+			while(rs.next()) {
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+				m.setPasswd(rs.getString("passwd"));
+				m.setEmail(rs.getString("email")); 
+				m.setBirth(rs.getString("birth"));
+				m.setHobby(rs.getString("hobby"));
+				m.setProfilePhotoPath(rs.getString("profile_photo_path"));
+			}
+			return m;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
 

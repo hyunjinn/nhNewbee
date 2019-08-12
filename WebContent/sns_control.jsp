@@ -6,6 +6,7 @@
 <jsp:useBean id="msg" class="mysns.sns.Message" />
 <jsp:useBean id="msgdao" class="mysns.sns.MessageDAO" />
 <jsp:useBean id="reply" class="mysns.sns.Reply" />
+<jsp:useBean id="memberDao" class="mysns.member.MemberDAO" />
 
 <!-- 프로퍼티 set -->
 <jsp:setProperty name="msg" property="*" />
@@ -73,7 +74,6 @@
 	// 전체 게시글 가져오기
 	else if (action.equals("getall")) {
 		ArrayList<MessageSet> datas = msgdao.getAll(mcnt, suid);
-		MemberDAO memberDao = new MemberDAO();
 		ArrayList<String> nusers = memberDao.getNewMembers();
 
 		String hobby = (String)(session.getAttribute("hobby"));
@@ -112,7 +112,9 @@
 	// 프로필 리스트 
 	else if (action.equals("profile_list")) {
 		// 유저 정보 get
-		// Member member = 
+		String uid = (String)session.getAttribute("uid");
+		Member member = memberDao.getMemberByUid(uid);
+		request.setAttribute("member", member);
 		pageContext.forward("profile.jsp");
 	}
 %>
