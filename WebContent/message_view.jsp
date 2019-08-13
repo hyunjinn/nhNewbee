@@ -32,10 +32,10 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 			<!-- 2. 우측 -->
 			<div class="content">
 			
-				<!-- 2-1. 상단 -->
+				<!-- 2-1. 상단 30% -->
 				<div class="member_div">
 				
-					<!-- 작성자 프로필, 아이디, 작성날짜  -->
+					<!-- 작성자 프로필, 아이디, 작성날짜 20%  -->
 					<div class="member"> 
 						 <div class="member_profile"> 
 						 	<img class="profile" src="${fileUploadPath}${m.photoPath}"> 
@@ -45,10 +45,11 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 							<span class="date_ymd"><%=ymd %></span>
 						</div>
 					</div>
-					<!-- 작성 메시지 -->
+					<!-- 작성 메시지 30% -->
 					<div class="message_div"> <div class="message">${m.msg} </div> </div> 
 					<!-- 좋아요 개수, 좋아요 누르기, 댓글 달기, 댓글 카운트-->
 					<div>
+						<!-- 25% -->
 						<div class="like">
 							<img src="img/like.png" width="30px" height="30px"> 
 							<span>${m.favcount}</span>
@@ -57,7 +58,8 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 							</div>
 						</div>
 					</div>
-					<div>
+					<!-- 25% -->
+					<div class="img_store">
 						<span><img src="img/like2.png"> </span>
 						<span><img src="img/reply.png"> </span>
 					</div>

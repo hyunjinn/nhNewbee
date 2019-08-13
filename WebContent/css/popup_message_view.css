@@ -61,6 +61,9 @@
 .content .member_div .member{
 	height : 20%;
 }
+.content .member_div .img_store{
+	height : 25%;
+}
 
 .content .member_div .member .member_profile {
 	width : 26px;
@@ -89,7 +92,7 @@
 }
 
 .content .member_div .like{
-	height : 20%;
+	height : 25%;
 	font-size: 13px;
 }
 .content .member_div .like .reply_count{
