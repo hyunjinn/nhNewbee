@@ -21,6 +21,9 @@ public class Reply {
 	
 	// 답글 작성일자
 	private String date;
+	
+	// 답글 단 사람의 프로필 사진 path - 테이블 join결과 생성됨 (MessageDao.getMessageSet())
+	private String profilePath;
 
 	public int getRid() {
 		return rid;
@@ -60,6 +63,14 @@ public class Reply {
 
 	public void setRmsg(String rmsg) {
 		this.rmsg = rmsg;
+	}
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
 	}
 	
 	

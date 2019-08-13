@@ -16,6 +16,6 @@
 <c:if test="${uid == null}">
 <c:choose> 
 	<c:when test="${type == 'msg'}"><input size = "100" name="msg" maxlength="100" disabled="disabled"  value="작성하려면 로그인 하세요!!"></c:when>
-	<c:when test="${type == 'rmsg'}">댓글달기 <input type="text" name="rmsg" maxlength="50" size="100" disabled="disabled" value="작성하려면 로그인 하세요!!"></c:when>
+	<c:when test="${type == 'rmsg'}">댓글달기 <input type="text" name="rmsg" maxlength="50" style="width: 430px" size="100" disabled="disabled" value="작성하려면 로그인 하세요!!"></c:when>
 </c:choose>
 </c:if>

@@ -100,7 +100,10 @@ public class MessageDAO {
 				m.setUid(rs.getString("uid"));
 				m.setPhotoPath(rs.getString("photo_path"));
 				
-				String rsql = "select *  from s_reply where mid=? order by date desc";
+				String rsql = "select r.*, profile_photo_path " + 
+						"from s_reply r " + 
+						"left join s_member m on r.uid = m.uid " + 
+						"where mid=? order by date desc ";
 				pstmt = conn.prepareStatement(rsql);
 				pstmt.setInt(1,rs.getInt("mid"));
 				ResultSet rrs = pstmt.executeQuery();
@@ -110,6 +113,7 @@ public class MessageDAO {
 					r.setUid(rrs.getString("uid"));
 					r.setRmsg(rrs.getString("rmsg"));
 					r.setDate(rrs.getDate("date")+"/"+rrs.getTime("date"));
+					r.setProfilePath(rrs.getString("profile_photo_path"));
 					rlist.add(r);
 				}
 				rrs.last();

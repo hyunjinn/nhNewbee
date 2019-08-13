@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $("#content").click(function() {
+            $("#popup").fadeIn();
+            
+         });
+         $(".exit").click(function() {
+            $("#popup").fadeout();
+         });
+      });
+   </script>
+<style>
+#uploadBtn {
+   position: fixed;
+   bottom: 0;
+   background-color: #e0eada;
+   width: 970px;
+   text-align: center;
+}
+
+#popup {
+   display: none;
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.9);
+}
+
+#popmenu {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   width: 300px;
+   height: 200px;
+   text-align: center;
+   background: #fff;
+}
+
+.exit {
+   position: absolute;
+   left: 50%;
+   bottom: 10px;
+   transform: translate(-50%, 0);
+   width: 60px;
+   height: 30px;
+   text-align: center;
+   line-height: 30px;
+   background: #007AAE;
+   cursor: pointer;
+}
+
+#popmenu p {
+   margin-top: 80px;
+}
+
+#content {
+   width: 300px;
+   height: 150px;
+   text-align: center;
+   color: #fff;
+   background: #555;
+   cursor: pointer;
+}
+</style>
+</head>
+<body>
+   <div id="popup">
+      <div id="popmenu">
+         <p>안녕하세요</p>
+         <div class="exit">닫기</div>
+      </div>
+   </div>
+
+   <div id="content">여기를 누르면 전체 팝업이 뜹니다.</div>
+
+</body>
+</html>

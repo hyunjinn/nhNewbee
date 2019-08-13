@@ -13,7 +13,7 @@ var Sns_main = (function(){
 		$(".list .imglist li").on('click', function(){
 			console.log($(this).attr('data-idx'));
 			var mid = $(this).attr('data-idx');
-			window.open("sns_control.jsp?action=message_view&mid="+ mid , '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+			window.open("sns_control.jsp?action=message_view&mid="+ mid , '_blank', 'location=yes,scrollbars=yes,status=yes');
 			
 		})
 		

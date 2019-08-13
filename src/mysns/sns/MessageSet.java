@@ -14,6 +14,8 @@ public class MessageSet {
 	// 해당 메시지에 대한 댓글 목록
 	private ArrayList<Reply> rlist = new ArrayList<Reply>();
 	
+	
+	
 	public Message getMessage() {
 		return message;
 	}

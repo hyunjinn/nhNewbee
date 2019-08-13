@@ -1,0 +1,113 @@
+.popup {
+   position: fixed;
+      transform: translate(-1%, -1%);
+   width: 100%;
+   height: 100%;
+   background: rgba(80, 75, 75, 0.9);
+}
+
+.popmenu {
+   position: absolute;
+   left: 20%;
+   top: 20%;
+   transform: translate(-18%, -15%);
+   width: 90%;
+   height: 600px;
+   text-align: center;
+   background: #fff;
+}
+
+.exit {
+   position: absolute;
+   left: 50%;
+   bottom: 10px;
+   transform: translate(-50%, 0);
+   width: 60px;
+   height: 30px;
+   text-align: center;
+   line-height: 30px;
+   background: #007AAE;
+   cursor: pointer;
+}
+
+.popmenu p {
+   margin-top: 80px;
+}
+
+.image_div {
+	width: 530px;
+	height:600px;
+	float : left;
+	border: 0.5px groove rgba(80, 75, 75, 0.9);
+
+}
+.image{
+	width : 300px;
+	height : 100%;
+}
+
+.content {
+	width : 430px;
+	height:600px;
+	float : right;
+	border: 0.5px groove rgba(80, 75, 75, 0.9);
+	text-align: justify;
+}
+
+.content .member_div {
+	height : 30%;
+}
+
+.content .member_div .member{
+	height : 20%;
+}
+
+.content .member_div .member .member_profile {
+	width : 26px;
+	height: 26px;
+    border-radius: 50%;
+    float:left;
+    margin: 0 10px 0 10px;
+}
+.content .member_div .member .member_info {
+    display: inline;
+    float:left;
+    margin: 0 10px 0 10px;
+}
+
+
+
+
+.content .member_div .message_div{
+	height : 60%;
+	
+}
+.content .member_div .message_div .message{
+	position: absolute;
+	float: left;
+	margin : 10px 0 0 10px;
+}
+
+.content .member_div  .like{
+	height : 20%;
+}
+
+.content .reply {
+	height : 70%;
+}
+
+.profile {
+	width: 40px;
+	height: 40px;
+    border-radius: 50%;
+}
+
+ .uid {
+	color: #385898;
+    cursor: pointer;
+}
+
+.date_ymd {
+	color: #90949c;
+    font-size: 12px;
+}
