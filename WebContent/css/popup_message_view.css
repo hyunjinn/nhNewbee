@@ -88,8 +88,14 @@
 	margin : 10px 0 0 10px;
 }
 
-.content .member_div  .like{
+.content .member_div .like{
 	height : 20%;
+	font-size: 13px;
+}
+.content .member_div .like .reply_count{
+	float:right;
+	line-height: 20px;
+	margin-right: 10px;
 }
 
 .content .reply {

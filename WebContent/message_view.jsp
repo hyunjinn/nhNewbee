@@ -47,8 +47,20 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 					</div>
 					<!-- 작성 메시지 -->
 					<div class="message_div"> <div class="message">${m.msg} </div> </div> 
-					<!-- 좋아요 -->
-					<div class="like"><img src="img/like.jpg" width="30px" height="30px"> ${m.favcount}</div>
+					<!-- 좋아요 개수, 좋아요 누르기, 댓글 달기, 댓글 카운트-->
+					<div>
+						<div class="like">
+							<img src="img/like.png" width="30px" height="30px"> 
+							<span>${m.favcount}</span>
+							<div class="reply_count" >
+								댓글 ${m.replycount}개
+							</div>
+						</div>
+					</div>
+					<div>
+						<span><img src="img/like2.png"> </span>
+						<span><img src="img/reply.png"> </span>
+					</div>
 					
 				</div>
 				
@@ -61,7 +73,6 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 							<input type="hidden" name="uid" value="${uid}" /> 
 							<input type="hidden" name="suid" value="${suid}" />
 							 <input type="hidden" name="curmsg" value="${mcnt.index}" />
-							<sns:write type="rmsg" />
 						</form>
 					</div>
 					<div class="list">
