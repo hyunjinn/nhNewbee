@@ -1,6 +1,5 @@
 <%@page import="mysns.sns.Message"%>
 <%@page import="mysns.sns.MessageSet"%>
-<%@page import="com.sun.swing.internal.plaf.metal.resources.metal"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -32,7 +31,7 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 			<!-- 2. 우측 -->
 			<div class="content">
 			
-				<!-- 2-1. 상단 30% -->
+				<!-- 2-1. 상단 40% -->
 				<div class="member_div">
 				
 					<!-- 작성자 프로필, 아이디, 작성날짜 20%  -->
@@ -45,28 +44,28 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 							<span class="date_ymd"><%=ymd %></span>
 						</div>
 					</div>
-					<!-- 작성 메시지 30% -->
+					<!-- 작성 메시지 60% -->
 					<div class="message_div"> <div class="message">${m.msg} </div> </div> 
 					<!-- 좋아요 개수, 좋아요 누르기, 댓글 달기, 댓글 카운트-->
-					<div>
-						<!-- 25% -->
+					<div style="margin-bottom: 3px;">
+						<!-- 20% -->
 						<div class="like">
-							<img src="img/like.png" width="30px" height="30px"> 
+							<img src="img/like.jpg" width="30px" height="30px" style=" cursor: pointer;"> 
 							<span>${m.favcount}</span>
 							<div class="reply_count" >
 								댓글 ${m.replycount}개
 							</div>
 						</div>
 					</div>
-					<!-- 25% -->
+					<!-- 20% -->
 					<div class="img_store">
-						<span><img src="img/like2.png"> </span>
-						<span><img src="img/reply.png"> </span>
+						<span><img src="img/like1.png"  style=" cursor: pointer;"> </span>
+						<span><img src="img/reply2.png"  style=" cursor: pointer;"> </span>
 					</div>
 					
 				</div>
 				
-				<!-- 2-2. 하단 -->
+				<!-- 2-2. 하단  60% -->
 				<div class="reply">
 					<div class="write">
 						<form action="sns_control.jsp?action=newreply&cnt=${cnt}"

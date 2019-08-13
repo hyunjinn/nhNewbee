@@ -35,34 +35,37 @@
 }
 
 .image_div {
-	width: 530px;
-	height:600px;
+	width: 58%;
+	height:100%;
 	float : left;
 	border: 0.5px groove rgba(80, 75, 75, 0.9);
 
 }
 .image{
-	width : 300px;
+	width : 100%;
 	height : 100%;
 }
 
 .content {
-	width : 430px;
-	height:600px;
+	width : 40%;
+	height: 100%;
 	float : right;
 	border: 0.5px groove rgba(80, 75, 75, 0.9);
 	text-align: justify;
 }
 
 .content .member_div {
-	height : 30%;
+	height : 40%;
 }
 
 .content .member_div .member{
 	height : 20%;
+	margin-top: 10px;
 }
 .content .member_div .img_store{
-	height : 25%;
+	height : 17%;
+    margin-top: 5px;
+	border-bottom: 1px solid #dadde1;
 }
 
 .content .member_div .member .member_profile {
@@ -94,15 +97,21 @@
 .content .member_div .like{
 	height : 25%;
 	font-size: 13px;
+    border-bottom: 1px solid #dadde1;
+    padding-bottom: 5px;
+    
+	
 }
 .content .member_div .like .reply_count{
 	float:right;
 	line-height: 20px;
-	margin-right: 10px;
+	margin-right: 20px;
+    margin-top: 3px;
+	
 }
 
 .content .reply {
-	height : 70%;
+	height : 60%;
 }
 
 .profile {
