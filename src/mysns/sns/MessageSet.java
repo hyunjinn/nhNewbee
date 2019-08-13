@@ -13,6 +13,9 @@ public class MessageSet {
 	
 	// 해당 메시지에 대한 댓글 목록
 	private ArrayList<Reply> rlist = new ArrayList<Reply>();
+
+	// 해당 메시지를 좋아요를 누른 정보 목록
+	private ArrayList<Like> likeList = new ArrayList<Like>();
 	
 	
 	
@@ -28,4 +31,12 @@ public class MessageSet {
 	public void setRlist(ArrayList<Reply> rlist) {
 		this.rlist = rlist;
 	}
+	public ArrayList<Like> getLikeList() {
+		return likeList;
+	}
+	public void setLikeList(ArrayList<Like> likeList) {
+		this.likeList = likeList;
+	}
+	
+	
 }

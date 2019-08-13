@@ -77,13 +77,13 @@ public class MessageDAO {
 		return datas;
 	}
 	
-	// 특정 메시지에 연관된 메시지, 댓글 목록 
+	// 특정 메시지에 연관된 메시지, 댓글 목록 , 좋아요 누른 유저 목록 
 	public MessageSet getMessageSet(String mid) {
 		conn = DBManager.getConnection();
 		String sql;
 		MessageSet ms = new MessageSet();
 		try {
-			// 특정 회원 게시물 only 인 경우
+			/** 1.  특정 회원 게시물 only 인 경우 메시지 get */
 			sql = "select * from s_message where mid=? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,mid);
@@ -100,6 +100,7 @@ public class MessageDAO {
 				m.setUid(rs.getString("uid"));
 				m.setPhotoPath(rs.getString("photo_path"));
 				
+				/** 2. 댓글 목록 */ 
 				String rsql = "select r.*, profile_photo_path " + 
 						"from s_reply r " + 
 						"left join s_member m on r.uid = m.uid " + 
@@ -119,11 +120,30 @@ public class MessageDAO {
 				}
 				rrs.last();
 				m.setReplycount(rrs.getRow());
+				rrs.close();
 				//System.out.println("r count"+rrs.getRow());
 				
 				ms.setMessage(m);
 				ms.setRlist(rlist);
-				rrs.close();
+				
+				
+				
+				/** 3. 좋아요 누른사람 목록 */
+				String sql2 = "SELECT * FROM s_like where mid = ? order by date desc" ;
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1,rs.getInt("mid"));
+				ResultSet rs2 = pstmt.executeQuery();
+				ArrayList<Like> likeList = new ArrayList<Like>();
+				while(rs2.next()) {
+					Like like = new Like();
+					like.setMid(rs2.getInt("mid"));
+					like.setDate(rs2.getDate("date")+"/"+rs2.getTime("date"));
+					like.setUid(rs2.getString("uid"));
+					likeList.add(like);
+				}
+				rs2.last();
+				ms.setLikeList(likeList);
+				rs2.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

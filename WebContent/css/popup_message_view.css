@@ -136,3 +136,22 @@
     font-size: 12px;
 }
 
+
+.tooltipUI{
+    background-color:#FAF4C0;
+  }
+  .ui-tooltip {
+    padding: 8px;
+    position: absolute;
+    z-index: 9999;
+    max-width: 256px;
+    -webkit-box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px #aaa;
+    white-space: pre-line; 
+  }
+  body .ui-tooltip {
+    border-width: 2px;
+  }
+
+
+

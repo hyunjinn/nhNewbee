@@ -1,3 +1,5 @@
+<%@page import="mysns.sns.Like"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="mysns.sns.Message"%>
 <%@page import="mysns.sns.MessageSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +11,10 @@
 <head>
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
+<script src="lib/popper.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/popup_message_view.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <% 
@@ -17,6 +22,13 @@ MessageSet messageSet = (MessageSet)request.getAttribute("messageSet");
 Message message = messageSet.getMessage();
 String m_date = message.getDate();
 String ymd = m_date.substring(0, m_date.indexOf('/'));
+ArrayList<Like> likeList = messageSet.getLikeList();
+String likeListStr = "";
+for(int i = 0 ; i < likeList.size() ; i ++){
+	likeListStr += likeList.get(i).getUid() +"/";
+}
+likeListStr = likeListStr.substring(0, likeListStr.length()-1);
+System.out.println(likeListStr);
 %>
 </head>
 
@@ -26,6 +38,12 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 			.done(function () {
 				console.log(MessageView);
 				MessageView.init(<%=message.getMid()%>, "<%=session.getAttribute("uid") %>" );
+			});
+			$("#tooltip").tooltip().attr('data-original-title', "<%=likeListStr %>" );
+			$("#tooltip").tooltip({
+				content : function(){
+					return $('#tooltip').attr('data-original-title').html();
+				}
 			});
 	})
 </script>
@@ -59,11 +77,15 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 					</div>
 					<!-- 작성 메시지 60% -->
 					<div class="message_div"> <div class="message">${m.msg} </div> </div> 
+					
 					<!-- 좋아요 개수, 좋아요 누르기, 댓글 달기, 댓글 카운트-->
 					<div style="margin-bottom: 3px;">
 						<!-- 20% -->
 						<div class="like">
-							<img src="img/like.jpg" width="30px" height="30px" style=" cursor: pointer;"> 
+							<!-- 좋아요 이미지에 마우스 hover 시 좋아요 누른 사람 출력  -->
+							<span id="tooltip" title="aa2">
+								<img src="img/like.jpg" width="30px" height="30px" style=" cursor: pointer;"> 
+							</span>
 							<span>${m.favcount}</span>
 							<div class="reply_count" >
 								댓글 ${m.replycount}개
