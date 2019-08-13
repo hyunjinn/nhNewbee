@@ -36,7 +36,7 @@
 		// 게시글 작성시에는 현재 상태와 상관 없이 전체 게시물의 첫페이지로 이동 하기 위한 url
 		home = "sns_control.jsp?action=getall";
 		// 첫페이지 요청인 경우, 기본 게시물 5개씩
-		mcnt = 5;
+		mcnt = 10;
 	}
 
 	// 댓글이 달린 게시물 위치 정보 -> accordion 상태 유지 목적
@@ -73,7 +73,7 @@
 	}
 	// 전체 게시글 가져오기
 	else if (action.equals("getall")) {
-		ArrayList<MessageSet> datas = msgdao.getAll(mcnt, suid);
+		ArrayList<MessageSet> datas = msgdao.getMsgList(mcnt, suid);
 		ArrayList<String> nusers = memberDao.getNewMembers();
 
 		String hobby = (String)(session.getAttribute("hobby"));
@@ -92,7 +92,7 @@
 		request.setAttribute("sameHobbyUserList", sameHobbyUserList);
 		// 게시글 목록
 		request.setAttribute("datas", datas);
-
+		
 		// 신규 회원 목록
 		request.setAttribute("nusers", nusers);
 
@@ -116,5 +116,14 @@
 		Member member = memberDao.getMemberByUid(uid);
 		request.setAttribute("member", member);
 		pageContext.forward("profile.jsp");
+	}
+	// 메세지 뷰
+	else if( action.equals("message_view") ){
+		String mid = request.getParameter("mid");
+		MessageSet messageSet = msgdao.getMessageSet(mid);
+		
+		// 게시글 목록
+		request.setAttribute("messageSet", messageSet);
+		pageContext.forward("message_view.jsp");
 	}
 %>
