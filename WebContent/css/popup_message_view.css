@@ -85,7 +85,7 @@
 
 
 .content .member_div .message_div{
-	height : 60%;
+	height : 40%;
 	
 }
 .content .member_div .message_div .message{
@@ -110,8 +110,14 @@
 	
 }
 
+
 .content .reply {
 	height : 60%;
+	overflow:scroll;
+}
+
+.list .list_ul{
+	list-style:none; padding: 10px; 
 }
 
 .profile {

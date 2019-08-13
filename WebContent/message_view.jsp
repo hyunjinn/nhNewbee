@@ -77,15 +77,17 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 						</form>
 					</div>
 					<div class="list">
-						<ul style="list-style:none; padding: 10px">
+						<ul class="list_ul" >
 							<c:forEach var="r" items="${rlist}">
 								<li>
-									<div>
-										<img class="profile" src="${fileUploadPath}${r.profilePath}">
-										<a href="sns_control.jsp?action=getall&suid=${r.uid}" class="uid"> ${r.uid }</a> ${r.rmsg}
-										<sns:rmenu curmsg="${mcnt.index}" rid="${r.rid}" ruid="${r.uid}" />
-										<br>
-										<span class="date_ymd" style="margin-left: 43px">${r.date}</span>
+									<div style="float: left; margin-bottom: 12px;">
+										<img  class="profile" style="float: left;" src="${fileUploadPath}${r.profilePath}">
+										<div style="display: inline; float: left; padding-left: 10px;">
+											<a href="sns_control.jsp?action=getall&suid=${r.uid}" class="uid"> ${r.uid }</a> ${r.rmsg}
+											<sns:rmenu curmsg="${mcnt.index}" rid="${r.rid}" ruid="${r.uid}" />
+											<br>
+											<span class="date_ymd" style="margin-left: 43px">${r.date}</span>
+										</div>
 									</div>
 								</li>
 							</c:forEach> 
