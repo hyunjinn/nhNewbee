@@ -333,13 +333,20 @@ public class MessageDAO {
 	 * 좋아요 추가
 	 * @param mid
 	 */
-	public void favorite(int mid) {
+	public void addFavorite(int mid, String uid) {
 		conn = DBManager.getConnection();
 		// 좋아요 추가를 위해 favcount 를 +1 해서 update 함
 		String sql = "update s_message set favcount=favcount+1 where mid=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mid);
+			pstmt.executeUpdate();
+			
+			// 좋아요 누른 유저정보 추가 
+			String sql2 = "insert into s_like (`uid`,`mid`) values (?,?)";
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, uid);
+			pstmt.setInt(2, mid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -354,4 +361,70 @@ public class MessageDAO {
 			}
 		}
 	}
+	// 좋아요 해제
+	public void deleteFavorite(int mid, String uid) {
+		conn = DBManager.getConnection();
+		// 좋아요 추가를 위해 favcount 를 +1 해서 update 함
+		String sql = "update s_message set favcount=favcount-1 where mid=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			pstmt.executeUpdate();
+			
+			// 좋아요 누른 유저정보 삭제
+			String sql2 = "delete  from s_like where uid = ? and mid = ? ;";
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, uid);
+			pstmt.setInt(2, mid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getErrorCode());
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	// 특정 유저가 특정 게시글에 좋아요 눌렀는지 체크 
+	public boolean isUserLikeMessage(String uid, int mid) {
+		conn = DBManager.getConnection();
+		// 좋아요 추가를 위해 favcount 를 +1 해서 update 함
+		String sql = "SELECT * FROM s_like where uid = ? and mid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			pstmt.setInt(2, mid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+			return false;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getErrorCode());
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+		
+	}
+	
+	
+	// 특정 게시글에 좋아요를 누른 유저 출력 
+	
 }

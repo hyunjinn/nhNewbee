@@ -54,3 +54,13 @@ CREATE TABLE `s_reply` (
   KEY `message_FK_idx` (`mid`),
   CONSTRAINT `message_FK` FOREIGN KEY (`mid`) REFERENCES `s_message` (`mid`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `s_like` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(10) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='좋아요 관리 ';
+

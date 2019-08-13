@@ -72,21 +72,21 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 					</div>
 					<!-- 20% -->
 					<div class="img_store">
-						<span><img src="img/like1.png"  style=" cursor: pointer;" id="like"> </span>
-						<span><img src="img/reply2.png"  style=" cursor: pointer;" > </span>
+						<span><img src="img/like1.png"  style=" cursor: pointer; display: none;" name="like" id="like1"> </span>
+						<span><img src="img/like_clicked.png"  style=" cursor: pointer; display: none" name="like" id="like2"> </span>
+						<span><img src="img/reply2.png" id="reply_img" style=" cursor: pointer;" > </span>
 					</div>
 					
 				</div>
 				
 				<!-- 2-2. 하단  60% -->
 				<div class="reply">
-					<div class="write">
-						<form action="sns_control.jsp?action=newreply&cnt=${cnt}"
-							method="post">
+					<div class="write" style="display: none;">
+						<form action="sns_control.jsp?action=newreply&cnt=${cnt}" method="post">
 							<input type="hidden" name="mid" value="${m.mid}" /> 
 							<input type="hidden" name="uid" value="${uid}" /> 
-							<input type="hidden" name="suid" value="${suid}" />
-							 <input type="hidden" name="curmsg" value="${mcnt.index}" />
+							<input type="text" name="rmsg"  /> 
+							<input type="submit" value="등록"/>
 						</form>
 					</div>
 					<div class="list">
@@ -108,7 +108,6 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 					</div>
 				</div>
 			</div>
-			<div class="exit">닫기</div>
 		</div>
 	</div>
 

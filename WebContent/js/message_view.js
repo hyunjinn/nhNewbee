@@ -2,7 +2,6 @@ var MessageView = (function(){
 	
 	var cache = {};
 	
-	// default setting
 	var defaultSetting = function(){
 		
 		// 회원일때만 초기 좋아요 여부 체크
@@ -11,6 +10,14 @@ var MessageView = (function(){
 		}
 	}
 	
+	var bindEvent = function(){
+		// 댓글 이미지 클릭 시
+		$("#reply_img").on('click', function(){
+			$(".write").toggle();
+		})
+		
+		$("img[name='like']").on('click', MessageView.likeClick);
+	}
 	
 	
 	
@@ -20,20 +27,24 @@ var MessageView = (function(){
 			cache.mid = mid;
 			cache.uid = uid;
 			defaultSetting();
+			bindEvent();
 		},
 
 		// 해당 회원이 해당 게시글을 좋아요를 눌렀는지 체크
 		likeCheck : function(mid, uid){
+			var url = "/mysns/like?mid="+mid+"&uid="+uid;
+			
 			 $.ajax({
-                 type: "GET",
-                 url: "/like",
-                 data: {
-                	 mid : mid,
-                	 uid : uid
-                 },
-                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				 url: url,
+                 type:"GET",
                  success: function (data) {
-                	 alert(data.result);	
+                	 if(data.check == true){
+                		 cache.like_already_check = true;
+                		 $("#like2").show();
+                	 }else{
+                		 cache.like_already_check = false;
+                		 $("#like1").show();
+                	 }
                  },
                  error: function (request, status, error) {
                      console.log(status, error);
@@ -42,27 +53,33 @@ var MessageView = (function(){
 		},
 		
 		// 좋아요 클릭
-		like : function(mid){
+		likeClick : function(){
+			if( ! cache.uid || cache.uid == "null"){
+				alert('로그인 하세요!');
+				return;
+			}
+			
+			var url;
+			
+			// 이미 눌려있는 상태에서 또 누름 -> 좋아요 해제 
+			if(cache.like_already_check == true){
+				url = "/mysns/sns_control.jsp?action=removeFav&mid="+cache.mid;
+			}else{
+				url = "/mysns/sns_control.jsp?action=addFav&mid="+cache.mid;
+			}
 			
 			 $.ajax({
                  type: "GET",
-                 url: faq_link + "/image-game-list/game-load",
-                 data: {
-                     page: page
+                 url: url,
+                 success : function(){
+                	 cache.like_already_check = !cache.like_already_check;
+                	 window.location.reload();
+                	 
                  },
-                 cache: false,
-                 success: function (data) {
-                     cache.image_game_list_html[ key ] = data;
-                     cache.game_list.append(data);
-                     cache.current_page = page;
-                     // 더보기 버튼 hide
-                     if( cache.current_page  == pageMaker["lastPage"] ){
-                         $("#more").hide();
-                     }
-                 },
-                 error: function (request, status, error) {
-                     console.log(status, error);
+                 error : function(){
+                	 alert("실패!");
                  }
+                 
              });
 			
 			

@@ -50,8 +50,11 @@
 			throw new Exception("메시지 등록 오류!!");
 		// 댓글 등록
 	} else if (action.equals("newreply")) {
-		if (msgdao.newReply(reply))
+		if (msgdao.newReply(reply)){
+			String mid = request.getParameter("mid");
+			home = "sns_control.jsp?action=message_view&mid="+mid;
 			pageContext.forward(home);
+		}
 		else
 			throw new Exception("댓글 등록 오류!!");
 	}
@@ -66,8 +69,8 @@
 	// 댓글 삭제
 	else if (action.equals("delreply")) {
 		int rid = Integer.parseInt(request.getParameter("rid"));
-		String mid = request.getParameter("mid");
 		if (msgdao.delReply(rid)) {
+			String mid = request.getParameter("mid");
 			home = "sns_control.jsp?action=message_view&mid="+mid;
 			pageContext.forward(home);
 		} else
@@ -108,9 +111,16 @@
 		pageContext.forward("sns_main.jsp");
 	}
 	// 좋아요 추가
-	else if (action.equals("fav")) {
-		msgdao.favorite(msg.getMid());
-		pageContext.forward(home);
+	else if (action.equals("addFav")) {
+		String uid = (String)session.getAttribute("uid");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		msgdao.addFavorite(mid, uid );
+	}
+	// 좋아요 삭제
+	else if (action.equals("removeFav")) {
+		String uid = (String)session.getAttribute("uid");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		msgdao.deleteFavorite(mid, uid );
 	}
 	// 프로필 리스트 
 	else if (action.equals("profile_list")) {
