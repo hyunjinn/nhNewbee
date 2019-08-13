@@ -65,7 +65,10 @@
 	}
 	// 댓글 삭제
 	else if (action.equals("delreply")) {
-		if (msgdao.delReply(reply.getRid())) {
+		int rid = Integer.parseInt(request.getParameter("rid"));
+		String mid = request.getParameter("mid");
+		if (msgdao.delReply(rid)) {
+			home = "sns_control.jsp?action=message_view&mid="+mid;
 			pageContext.forward(home);
 		} else
 			throw new Exception("메시지 등록 오류!!");

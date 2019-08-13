@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.jdbc.StringUtils;
+
 import mysns.util.*;
 /**
  * File : MemberDAO.java
@@ -41,7 +43,14 @@ public class MemberDAO {
 			//추가			
 			pstmt.setString(5, member.getHobby());
 			pstmt.setString(6, member.getBirth());
-			pstmt.setString(7, member.getProfilePhotoPath());
+			String profilePhotoPath ;
+			if(member.getProfilePhotoPath() == null) {
+				int randomNum = (int)(Math.random()*4) + 1 ;
+				profilePhotoPath =  "default_profile" + randomNum + ".jpg";
+			}else {
+				profilePhotoPath = member.getProfilePhotoPath();
+			}
+			pstmt.setString(7, profilePhotoPath);
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

@@ -7,6 +7,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="lib/jquery-1.9.1.js"></script>
+<script src="lib/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="css/popup_message_view.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -17,6 +19,17 @@ String m_date = message.getDate();
 String ymd = m_date.substring(0, m_date.indexOf('/'));
 %>
 </head>
+
+<script>
+	$(function(){
+		$.getScript("js/message_view.js")
+			.done(function () {
+				console.log(MessageView);
+				MessageView.init(<%=message.getMid()%>, "<%=session.getAttribute("uid") %>" );
+			});
+	})
+</script>
+
 <body>
 
 	<div class="popup">
@@ -59,8 +72,8 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 					</div>
 					<!-- 20% -->
 					<div class="img_store">
-						<span><img src="img/like1.png"  style=" cursor: pointer;"> </span>
-						<span><img src="img/reply2.png"  style=" cursor: pointer;"> </span>
+						<span><img src="img/like1.png"  style=" cursor: pointer;" id="like"> </span>
+						<span><img src="img/reply2.png"  style=" cursor: pointer;" > </span>
 					</div>
 					
 				</div>
@@ -84,12 +97,12 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 										<img  class="profile" style="float: left;" src="${fileUploadPath}${r.profilePath}">
 										<div style="display: inline; float: left; padding-left: 10px;">
 											<a href="sns_control.jsp?action=getall&suid=${r.uid}" class="uid"> ${r.uid }</a> ${r.rmsg}
-											<sns:rmenu curmsg="${mcnt.index}" rid="${r.rid}" ruid="${r.uid}" />
+											<sns:rmenu  rid="${r.rid}" mid="${r.mid}" ruid="${r.uid}" />
 											<br>
 											<span class="date_ymd" style="margin-left: 43px">${r.date}</span>
 										</div>
 									</div>
-								</li>
+								</li> 
 							</c:forEach> 
 						</ul>
 					</div>
@@ -98,44 +111,6 @@ String ymd = m_date.substring(0, m_date.indexOf('/'));
 			<div class="exit">닫기</div>
 		</div>
 	</div>
-	<!-- 
-<h3>친구들의 최신 소식</h3>
-	<div id="accordion">
-		<c:forEach varStatus="mcnt" var="msgs" items="${datas}">
-			<c:set var="m" value="${msgs.message}" />
-			<h3>[${m.uid}]${m.msg} :: [좋아요 ${m.favcount} | 댓글
-				${m.replycount}]</h3>
-			<div>
-				<p></p>
-				<p>
-					<sns:smenu mid="${m.mid}" auid="${m.uid}"
-						curmsg="${mcnt.index}" />
-					/ ${m.date}에 작성된 글입니다.
-				</p>
-
-				<ul class="reply">
-					<c:forEach var="r" items="${msgs.rlist}">
-						<li>${r.uid }::${r.rmsg}-${r.date}<sns:rmenu
-								curmsg="${mcnt.index}" rid="${r.rid}" ruid="${r.uid}" /></li>
-					</c:forEach>
-				</ul>
-
-				<form action="sns_control.jsp?action=newreply&cnt=${cnt}"
-					method="post">
-					<input type="hidden" name="mid" value="${m.mid}"> <input
-						type="hidden" name="uid" value="${uid}"> <input
-						type="hidden" name="suid" value="${suid}"> <input
-						type="hidden" name="curmsg" value="${mcnt.index}">
-					<sns:write type="rmsg" />
-				</form>
-			</div>
-		</c:forEach>
-	</div>
-	
-	<div align="center">
-		<a href="sns_control.jsp?action=getall&cnt=${cnt+5}&suid=${suid}">더보기&gt;&gt;</a>
-	</div>
-	 -->
 
 
 </body>

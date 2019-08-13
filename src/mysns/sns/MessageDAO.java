@@ -111,6 +111,7 @@ public class MessageDAO {
 					Reply r = new Reply();
 					r.setRid(rrs.getInt("rid"));
 					r.setUid(rrs.getString("uid"));
+					r.setMid(Integer.parseInt(rrs.getString("mid")));
 					r.setRmsg(rrs.getString("rmsg"));
 					r.setDate(rrs.getDate("date")+"/"+rrs.getTime("date"));
 					r.setProfilePath(rrs.getString("profile_photo_path"));
