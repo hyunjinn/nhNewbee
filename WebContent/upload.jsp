@@ -68,7 +68,7 @@
 
 				<div class="popupbtn">
 					<input type="submit" class="fun-btn" value="저장"> &nbsp;&nbsp;&nbsp; 
-					<input type="button" class="fun-btn" value="취소">
+					<button type="button" class="fun-btn" onclick = "location.href='index.jsp'">취소
 				</div>
 			</form>
 		</div>

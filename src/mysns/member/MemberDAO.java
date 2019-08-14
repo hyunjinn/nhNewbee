@@ -144,7 +144,7 @@ public class MemberDAO {
 		//회원 목록은 일주일 치만 가져옴 
 
 		String sql = "select name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
-				" and  date_format(now(),'%m%d') - date_format(birth,'%m%d') between 1 and 7 order by birth";
+				" and  date_format(birth,'%m%d') - date_format(now(),'%m%d') between 1 and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
