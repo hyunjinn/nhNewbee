@@ -13,17 +13,32 @@
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
-
 <script src="lib/jquery-1.9.1.js"></script>
 <script src="lib/jquery-ui.js"></script>
+<!-- <script src="js/popup.js"></script> -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <script>
 	$(function() {
-		$("#accordion").accordion({
+		/* $("#accordion").accordion({
 			heightStyle : "content",
 			active : parseInt("${curmsg == null ? 0:curmsg}")
-		});
+		}); */
 		$.getScript("js/sns_main.js");
+		$("#uploadBtn").click(function() {
+			console.log($("#popup"));
+			$("#popup").fadeIn();
+		});
+		$("#exit").click(function() {
+			$("#popup").fadeOut();
+		});
 	});
 
 	function newuser() {
@@ -33,20 +48,16 @@
 						"newuser",
 						"titlebar=no,location=no,scrollbars=no,resizeable=no,menubar=no,toolbar=no,width=800,height=800");
 	}
-</script>
 
-<style>
-</style>
+</script>
 
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
 <body>
-	<!--  -->
+	<!-- PopUp창 -->
 	<div id="wrap">
 		<header>
-			<!--  <a href="sns_main.jsp"> <img id="logo" src="img/img/logo.png"> </a> -->
-
 			<nav id="top_menu">
 				<div>
 					<ul>
@@ -80,13 +91,14 @@
 					</a>
 				</div>
 			</div>
-			
+
 			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="javascript:newuser()">New User</a></li>
 						<li><a href="sns_control.jsp?action=getall">전체글보기</a>
+						<li><a href="upload.jsp">사진업로드</a>
 					</ul>
 				</div>
 			</nav>
@@ -107,10 +119,10 @@
 
 			</article>
 			<!-- 생일인 친구 -->
-			<article id="guestbook">
+			<article class="guestbook">
 
-				<div id="guestbook_title">
-					<h3>오늘 생일인 친구</h3>
+				<div class="guestbook_title">
+					<h3 class="title1">오늘 생일인 친구</h3>
 				</div>
 				<c:forEach items="${birthMember}" var="n">
 					<ul>
@@ -118,8 +130,8 @@
 					</ul>
 				</c:forEach>
 
-				<div id="guestbook_title">
-					<h3>남은 친구 생일</h3>
+				<div class="guestbook_title">
+					<h3 class="title1">남은 친구 생일</h3>
 				</div>
 
 				<c:forEach items="${beforMember}" var="n">
@@ -128,19 +140,33 @@
 					</ul>
 				</c:forEach>
 
-				<div id="guestbook_title">
-					<h3>지나간 친구 생일</h3>
+				<div class="guestbook_title">
+					<h3 class="title1">지나간 친구 생일</h3>
 				</div>
 				<c:forEach items="${afterMember}" var="n">
 					<ul>
 						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
 					</ul>
 				</c:forEach>
+			</article>
+			<!--End birth-->
 
+			<article class="guestbook">
+				<div class="guestbook_title">
+					<h3 class="title1">새로 가입한 친구들</h3>
+				</div>
 
+				<c:forEach items="${nusers}" var="n">
+					<ul>
+						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+					</ul>
+				</c:forEach>
+			</article>
+
+			<article class="guestbook">
 				<c:if test="${ hobby != null}">
-					<div id="guestbook_title">
-						<h3>같은 취미를 가진 친구들</h3>
+					<div class="guestbook_title">
+						<h3 class="title1">같은 취미를 가진 친구</h3>
 					</div>
 					<c:forEach items="${sameHobbyUserList}" var="member">
 						<ul>
@@ -149,20 +175,6 @@
 						</ul>
 					</c:forEach>
 				</c:if>
-
-			</article>
-			<!--End birth-->
-			<article id="guestbook">
-				<div id="guestbook_title">
-					<!-- <img src="img/img/ttl_memo.gif"> -->
-					<h3>새로 가입한 친구들</h3>
-				</div>
-
-				<c:forEach items="${nusers}" var="n">
-					<ul>
-						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
-					</ul>
-				</c:forEach>
 			</article>
 		</aside>
 		<!-- 왼쪽 Aside 끝 -->
@@ -183,30 +195,28 @@
 					</form>
 					 -->
 
-					  
-					 <div class="list">
-						 <ul class="imglist">
-						 	<c:forEach  var="msgs" items="${datas}">
-						 		<c:set var="m" value="${msgs.message}" />
-							 	<li data-idx="${m.mid}" >
-							 		<a>
-							 			<p class="thumb">
-							 				<img src= "${fileUploadPath}${m.photoPath}" />
-							 			</p>
-							 			<p class="game_tit"> ${m.uid} / ${m.date} </p>
-							 		</a>
-							 	</li>
-						 	</c:forEach>
-						 </ul>
-					 </div>
+
+					<div class="list">
+						<ul class="imglist">
+							<c:forEach var="msgs" items="${datas}">
+								<c:set var="m" value="${msgs.message}" />
+								<li data-idx="${m.mid}"><a>
+										<p class="thumb">
+											<img src="${fileUploadPath}${m.photoPath}" />
+										</p>
+										<p class="game_tit">${m.uid}/${m.date}</p>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
 					<p class="img_more">
-						<button type="button" id="more" onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
+						<button type="button" id="more"
+							onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
 					</p>
 
 				</section>
 			</section>
 		</div>
-
 
 		<footer>
 			<div class="container1">
@@ -255,8 +265,14 @@
 					<!-- end of footer-outer-block -->
 
 				</section>
-				<!-- end of footer-area -->
 		</footer>
+
+		<!-- 업로드 버튼 -->
+		<div id="uploadBtn">
+			<a href="upload.jsp" style="font-size: 55px;">+</a>
+		</div>
+
+
 	</div>
 </body>
 </html>

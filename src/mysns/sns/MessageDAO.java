@@ -447,4 +447,28 @@ public class MessageDAO {
 	
 	// 특정 게시글에 좋아요를 누른 유저 출력 
 	
+	//게시글 추가
+	public boolean uploadBoard(Message board) {
+		conn = DBManager.getConnection();
+		String sql = "insert into s_message(uid, msg, favcount, replycount, date, photo_path) values(?, ?, ?,?, now() , ?);";	
+			
+			System.out.println("uid : "+ board.getUid());
+			System.out.println("Msg : "+ board.getMsg());
+			System.out.println("photoPath : "+ board.getPhotoPath());
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getUid());
+			pstmt.setString(2, board.getMsg()); //새로운 게시글의 text
+			pstmt.setInt(3, 0); 
+			pstmt.setInt(4, 0);
+			pstmt.setString(5, board.getPhotoPath()); //새로운 게시글의 사진
+			pstmt.executeUpdate();
+			return true;
+		}catch(Exception e){
+			System.out.println("uploadBoard오류"+ e.getMessage());
+			return false;
+		}
+		
+	}
+	
 }

@@ -35,7 +35,7 @@ aside #login_input li {
 aside #join_search {
     margin:10px 0 0 5px;	
 }
-aside #guestbook {
+aside .guestbook {
     width:189px;
     height:300px;	
     margin-top:15px;
@@ -43,17 +43,24 @@ aside #guestbook {
     border:solid 1px #cccccc;	
     border-radius:10px;
     box-shadow:2px 2px 5px #dddddd;
+    overflow-x: auto;  /* 스크롤 */
 }
-aside #guestbook_title {
+aside .guestbook_title {
     width:165px;	
     padding:10px 0 0 5px;
     margin:0 0 0 8px;
     border-bottom:solid 1px #cccccc;	
+} 
+aside .title1{
+	font-weight: bold;
+	font-size:15px;
+	color:red;
+	align:center;
 }
-aside #guestbook ul {
+aside .guestbook ul {
     margin:10px 0 0 40px;
 }
-aside #guestbook li {
+aside .guestbook li {
     margin-top:5px;
     list-style-image:url("../img/icon_blue.gif");
 }
@@ -387,4 +394,10 @@ a.sm-link{
     display: inline-block;    font: Arial;    -webkit-writing-mode: horizontal-tb !important;    -webkit-appearance: button;
     }
 
-
+#uploadBtn {
+	position: fixed;
+	bottom: 0;
+	background-color: #e0eada;
+	width: 970px;
+	text-align: center;
+}

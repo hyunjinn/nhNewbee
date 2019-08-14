@@ -69,7 +69,7 @@
 	String uploadPath= request.getRealPath("/upload");
 	// 한번에 올릴 수 있는 파일 용량 : 10M로 제한
 	int size = 10*1024*1024;
-
+	System.out.println("uploadPath" + uploadPath);
 	// 신규 회원등록
 	if (action.equals("new")) {
 		// 파일 업로드를 위한 request, 일반적인 application/x-www-form-urlencoded 방식이 아니기 때문에 multi.getParameter() 형식으로 파라미터를 받아와야한다

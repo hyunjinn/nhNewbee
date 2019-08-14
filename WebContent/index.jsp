@@ -8,3 +8,5 @@
 session.setAttribute("fileUploadPath", "http://127.0.0.1:8887/");
 response.sendRedirect("sns_control.jsp?action=getall"); 
 %>
+
+<!-- C:\Users\user\Desktop\project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\mysns2\upload -->

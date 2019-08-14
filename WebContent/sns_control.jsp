@@ -1,3 +1,5 @@
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8" import="mysns.sns.*,mysns.member.*,java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -82,12 +84,12 @@
 		ArrayList<MessageSet> datas = msgdao.getMsgList(mcnt, suid);
 		ArrayList<String> nusers = memberDao.getNewMembers();
 
-		String hobby = (String)(session.getAttribute("hobby"));
+		String hobby = (String) (session.getAttribute("hobby"));
 		//취미 리스트
 		ArrayList<Member> sameHobbyUserList = memberDao.getSameHobbyUsers(hobby);
-		
+
 		//생일 관련 
-		ArrayList<String> beforMember = memberDao.getBeforeBirthMembers(); 
+		ArrayList<String> beforMember = memberDao.getBeforeBirthMembers();
 		ArrayList<String> birthMember = memberDao.getBirthMembers();
 		ArrayList<String> afterMember = memberDao.getAfterBirthMembers();
 		request.setAttribute("birthMember", birthMember);
@@ -98,7 +100,7 @@
 		request.setAttribute("sameHobbyUserList", sameHobbyUserList);
 		// 게시글 목록
 		request.setAttribute("datas", datas);
-		
+
 		// 신규 회원 목록
 		request.setAttribute("nusers", nusers);
 
@@ -125,18 +127,45 @@
 	// 프로필 리스트 
 	else if (action.equals("profile_list")) {
 		// 유저 정보 get
-		String uid = (String)session.getAttribute("uid");
+		String uid = (String) session.getAttribute("uid");
 		Member member = memberDao.getMemberByUid(uid);
 		request.setAttribute("member", member);
 		pageContext.forward("profile.jsp");
 	}
 	// 메세지 뷰
-	else if( action.equals("message_view") ){
+	else if (action.equals("message_view")) {
 		String mid = request.getParameter("mid");
 		MessageSet messageSet = msgdao.getMessageSet(mid);
-		
+
 		// 게시글 목록
 		request.setAttribute("messageSet", messageSet);
 		pageContext.forward("message_view.jsp");
+		//새 게시글(사진+문구) 업로드	
+	} else if (action.equals("upload")) {
+		//1. Multipart 
+		String uploadPath = request.getRealPath("/upload");
+		// 한번에 올릴 수 있는 파일 용량 : 10M로 제한
+		int size = 10 * 1024 * 1024;
+		MultipartRequest multipartRequest = new MultipartRequest(request, uploadPath, size, "utf-8",
+				new DefaultFileRenamePolicy());
+		String textArea = multipartRequest.getParameter("textArea");
+		//파일이름
+		Enumeration files = multipartRequest.getFileNames();
+		String fileName = multipartRequest.getFilesystemName((String) files.nextElement());
+		
+		String uid = (String) session.getAttribute("uid");
+		
+		Message board = new Message();
+		board.setUid(uid);
+		board.setMsg(textArea);
+		board.setPhotoPath(fileName);
+		request.setAttribute("board",board);
+		
+		if(msgdao.uploadBoard(board)){ //성공하면
+			pageContext.forward("sns_control.jsp?action=getall");
+		}else{
+			System.out.println("업로드 실패 : msgdao.uploadBoard(board):"+msgdao.uploadBoard(board));
+		}
+		
 	}
 %>
