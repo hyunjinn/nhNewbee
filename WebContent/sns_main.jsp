@@ -80,7 +80,7 @@
 					</a>
 				</div>
 			</div>
-			
+
 			<nav id="main_menu" sytle="color: #444444;">
 				<div>
 					<ul>
@@ -171,36 +171,32 @@
 		<div>
 			<section id="main">
 				<section id="content">
-					<!-- 1. 등록하기
-					<img src="img/img/main_img.png"> 
-					<b style="color: red; margin-left: 40%; font-size: 20px;">내소식
-						업데이트</b>
-					<form class="m_form" method="post"
-						action="sns_control.jsp?action=newmsg">
-						<input type="hidden" name="uid" value="${uid}">
-						<sns:write type="msg" />
-						<button class="submit" type="submit">등록</button>
-					</form>
-					 -->
 
-					  
-					 <div class="list">
-						 <ul class="imglist">
-						 	<c:forEach  var="msgs" items="${datas}">
-						 		<c:set var="m" value="${msgs.message}" />
-							 	<li data-idx="${m.mid}" >
-							 		<a>
-							 			<p class="thumb">
-							 				<img src= "${fileUploadPath}${m.photoPath}" />
-							 			</p>
-							 			<p class="game_tit"> ${m.uid} / ${m.date} </p>
-							 		</a>
-							 	</li>
-						 	</c:forEach>
-						 </ul>
-					 </div>
+
+					<div class="list">
+						<ul class="imglist">
+							<c:forEach var="msgs" items="${datas}">
+								<c:set var="m" value="${msgs.message}" />
+								<li data-idx="${m.mid}"><a>
+										<p class="thumb">
+											<img src="${fileUploadPath}${m.photoPath}" />
+										</p>
+										<p class="game_tit">
+											${m.uid} / ${m.date}
+											<c:if test="${uid == m.uid}">
+												<span style="color: blue; cursor: pointer;" 
+													onclick="window.location.href='sns_control.jsp?action=delmsg&mid=${mid}'">[x]</span>
+											</c:if>
+										</p>
+
+
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
 					<p class="img_more">
-						<button type="button" id="more" onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
+						<button type="button" id="more"
+							onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
 					</p>
 
 				</section>

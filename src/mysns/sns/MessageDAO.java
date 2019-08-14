@@ -53,7 +53,7 @@ public class MessageDAO {
 				
 				m.setMid(rs.getInt("mid"));
 				m.setMsg(rs.getString("msg"));
-				m.setDate(rs.getDate("date")+" / "+rs.getTime("date"));
+				m.setDate(rs.getDate("date")+" "+rs.getTime("date"));
 				m.setFavcount(rs.getInt("favcount"));
 				m.setUid(rs.getString("uid"));
 				m.setPhotoPath(rs.getString("photo_path"));
@@ -204,7 +204,7 @@ public class MessageDAO {
 					r.setRid(rrs.getInt("rid"));
 					r.setUid(rrs.getString("uid"));
 					r.setRmsg(rrs.getString("rmsg"));
-					r.setDate(rrs.getDate("date")+"/"+rrs.getTime("date"));
+					r.setDate(rrs.getDate("date")+" "+rrs.getTime("date"));
 					rlist.add(r);
 				}
 				rrs.last();
