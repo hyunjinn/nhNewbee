@@ -206,10 +206,6 @@
 							</c:forEach>
 						</ul>
 					</div>
-					<p class="img_more">
-						<button type="button" id="more"
-							onclick="window.location.href='sns_control.jsp?action=getall&cnt=${cnt+10}&suid=${suid}'">더보기</button>
-					</p>
 
 				</section>
 			</section>

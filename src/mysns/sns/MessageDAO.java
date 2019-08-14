@@ -34,16 +34,14 @@ public class MessageDAO {
 		try {
 			// 전체 게시물인 경우
 			if((suid == null) || (suid.equals(""))) {
-				sql = "select * from s_message order by date desc limit 0,?";
+				sql = "select * from s_message order by date desc ";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, cnt);
 			}
 			// 특정 회원 게시물 only 인 경우
 			else{
-				sql = "select * from s_message where uid=? order by date desc limit 0,?";
+				sql = "select * from s_message where uid=? order by date desc ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1,suid);
-				pstmt.setInt(2,cnt);
 			}
 
 			ResultSet rs = pstmt.executeQuery();
@@ -170,16 +168,14 @@ public class MessageDAO {
 		try {
 			// 전체 게시물인 경우
 			if((suid == null) || (suid.equals(""))) {
-				sql = "select * from s_message order by date desc limit 0,?";
+				sql = "select * from s_message order by date desc ";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, cnt);
 			}
 			// 특정 회원 게시물 only 인 경우
 			else{
-				sql = "select * from s_message where uid=? order by date desc limit 0,?";
+				sql = "select * from s_message where uid=? order by date desc ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1,suid);
-				pstmt.setInt(2,cnt);
 			}
 
 			ResultSet rs = pstmt.executeQuery();
