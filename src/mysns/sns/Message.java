@@ -28,6 +28,7 @@ public class Message {
 	// 업로드 사진 경로
 	private String photoPath;
 	
+	
 	public int getMid() {
 		return mid;
 	}

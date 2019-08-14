@@ -136,13 +136,13 @@ public class MemberDAO {
 		ArrayList<String> beforMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
 
-		String sql = "select name, birth from s_member where birth is not null " +
+		String sql = "select name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
 				" and  date_format(now(),'%m%d') - date_format(birth,'%m%d') between 1 and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				beforMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+				beforMembers.add(rs.getString("name")+"님/"+rs.getString("newbirth"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -165,13 +165,13 @@ public class MemberDAO {
 		conn = DBManager.getConnection();
 		ArrayList<String> birthMembers = new ArrayList<String>();
 
-		String sql = "select name, birth from s_member where birth is not null " +
+		String sql = "select name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
 				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				birthMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+				birthMembers.add(rs.getString("name")+"님");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -189,14 +189,14 @@ public class MemberDAO {
 
 
 	}
-	//앞으로 3일동안 생일인 친구들	
+	//앞으로 7일동안 생일인 친구들	
 	public ArrayList<String> getAfterBirthMembers(){
 
 		conn = DBManager.getConnection();
 		ArrayList<String> afterMembers = new ArrayList<String>();
 		//회원 목록은 일주일 치만 가져옴 
 
-		String sql = "select name, birth " + 
+		String sql = "select name, date_format(birth,'%m%d') newbirth " + 
 				"from s_member where birth is not null " + 
 				"and  date_format(now(),'%m%d') - date_format(	birth,'%m%d') " + 
 				"between 1 and 7 order by birth";
@@ -204,7 +204,7 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				afterMembers.add("'"+ rs.getString("name")+" '님의 생일 : "+rs.getString("birth"));
+				afterMembers.add(rs.getString("name")+"님/"+rs.getString("newbirth"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
