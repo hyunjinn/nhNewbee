@@ -10,9 +10,9 @@ var Sns_main = (function(){
 		});
 		
 		// 이미지  클릭 시
-		$(".list .imglist li").on('click', function(){
+		$(".thumb").on('click', function(){
 			console.log($(this).attr('data-idx'));
-			var mid = $(this).attr('data-idx');
+			var mid = $(this).parents("li").attr('data-idx');
 			window.open("sns_control.jsp?action=message_view&mid="+ mid , '_blank', 'height=824,width=956,location=yes,scrollbars=yes,status=yes');
 			
 		})

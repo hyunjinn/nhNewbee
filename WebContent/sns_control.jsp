@@ -62,6 +62,7 @@
 	}
 	// 메시지 삭제
 	else if (action.equals("delmsg")) {
+		String mid = request.getParameter("mid");
 		if (msgdao.delMsg(msg.getMid()))
 			response.sendRedirect(home);
 		else

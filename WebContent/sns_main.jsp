@@ -183,17 +183,6 @@
 		<div>
 			<section id="main">
 				<section id="content">
-					<!-- 1. 등록하기
-					<img src="img/img/main_img.png"> 
-					<b style="color: red; margin-left: 40%; font-size: 20px;">내소식
-						업데이트</b>
-					<form class="m_form" method="post"
-						action="sns_control.jsp?action=newmsg">
-						<input type="hidden" name="uid" value="${uid}">
-						<sns:write type="msg" />
-						<button class="submit" type="submit">등록</button>
-					</form>
-					 -->
 
 
 					<div class="list">
@@ -204,7 +193,15 @@
 										<p class="thumb">
 											<img src="${fileUploadPath}${m.photoPath}" />
 										</p>
-										<p class="game_tit">${m.uid}/${m.date}</p>
+										<p class="game_tit">
+											${m.uid} / ${m.date}
+											<c:if test="${uid == m.uid}">
+												<span style="color: blue; cursor: pointer;" 
+													onclick="window.location.href='sns_control.jsp?action=delmsg&mid=${m.mid}'">[x]</span>
+											</c:if>
+										</p>
+
+
 								</a></li>
 							</c:forEach>
 						</ul>

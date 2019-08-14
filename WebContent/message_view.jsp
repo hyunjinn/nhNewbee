@@ -27,8 +27,9 @@ String likeListStr = "";
 for(int i = 0 ; i < likeList.size() ; i ++){
 	likeListStr += likeList.get(i).getUid() +"/";
 }
-likeListStr = likeListStr.substring(0, likeListStr.length()-1);
-System.out.println(likeListStr);
+if(likeListStr.length() > 1){
+	likeListStr = likeListStr.substring(0, likeListStr.length()-1);
+}
 %>
 </head>
 
