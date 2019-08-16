@@ -87,7 +87,7 @@
 					<a href="sns_control.jsp?action=getall"
 						class="sm-link sm-link_padding-all sm-link1" style="top: 35px;">
 						<span class="sm-link__label"
-						style="font-size: 30px; color: #494902;">&nbsp;FACEBOOK&nbsp;</span>
+						style="font-size: 30px; color: #494902;">&nbsp;15GRAM&nbsp;</span>
 					</a>
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 				</div>
 				<c:forEach items="${birthMember}" var="n">
 					<ul>
-						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+						<li><a href="sns_control.jsp?action=getall&suid=${n.uid}">${n.uid}키키</a></li>
 					</ul>
 				</c:forEach>
 
@@ -136,7 +136,7 @@
 
 				<c:forEach items="${beforMember}" var="n">
 					<ul>
-						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+						<li><a href="sns_control.jsp?action=getall&suid=${n.uid}">${n.uid}</a></li>
 					</ul>
 				</c:forEach>
 
@@ -145,7 +145,7 @@
 				</div>
 				<c:forEach items="${afterMember}" var="n">
 					<ul>
-						<li><a href="sns_control.jsp?action=getall&suid=${n}">${n}</a></li>
+						<li><a href="sns_control.jsp?action=getall&suid=${n.uid}">${n.uid}</a></li>
 					</ul>
 				</c:forEach>
 			</article>

@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mysns.util.*;
+import mysns.util.DBManager;
 /**
  * File : MemberDAO.java
  * Desc : SNS 회원 등록 및 로그인 처리 클래스
@@ -138,18 +139,23 @@ public class MemberDAO {
 	//지나간 친구 생일 (7일전까지) 7l'[/ ,;
 	
 	
-	public ArrayList<String> getBeforeBirthMembers(){
+	public ArrayList<Member> getBeforeBirthMembers(){
 		conn = DBManager.getConnection();
-		ArrayList<String> beforMembers = new ArrayList<String>();
+		ArrayList<Member> list = new ArrayList<Member>();
 		//회원 목록은 일주일 치만 가져옴 
 
-		String sql = "select name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
+		String sql = "select uid, name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
 				" and  date_format(birth,'%m%d') - date_format(now(),'%m%d') between 1 and 7 order by birth";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				beforMembers.add(rs.getString("name")+"님/"+rs.getString("newbirth"));
+				Member m  = new Member();
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+				m.setBirth(rs.getString("newbirth"));
+				list.add(m);
+				//System.out.println("ㄴㅇ린ㅇㄹㄴㅇㄹㄴㅇㄹ"+member.getUid()+ " ,");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,22 +169,28 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return beforMembers;
+		return list;
 
 	}
 	//생일인 친구들
-	public ArrayList<String> getBirthMembers(){
+	public ArrayList<Member> getBirthMembers(){
 
 		conn = DBManager.getConnection();
-		ArrayList<String> birthMembers = new ArrayList<String>();
-
-		String sql = "select name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
+		//ArrayList<String> birthMembers = new ArrayList<String>();
+		ArrayList<Member> birthMembers = new ArrayList<Member>();
+		
+		String sql = "select uid, name, date_format(birth,'%m%d') newbirth from s_member where birth is not null " +
 				"and  date_format(birth,'%m%d') = date_format(now(),'%m%d')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				birthMembers.add(rs.getString("name")+"님");
+				Member m  = new Member();
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+				m.setBirth(rs.getString("newbirth"));
+				
+				birthMembers.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -197,13 +209,15 @@ public class MemberDAO {
 
 	}
 	//앞으로 7일동안 생일인 친구들	
-	public ArrayList<String> getAfterBirthMembers(){
+	public ArrayList<Member> getAfterBirthMembers(){
 
 		conn = DBManager.getConnection();
-		ArrayList<String> afterMembers = new ArrayList<String>();
-		//회원 목록은 일주일 치만 가져옴 
+	/*	ArrayList<String> afterMembers = new ArrayList<String>();*/
+		//회원 목록은 일주일 치만 가져옴
+		
+		ArrayList<Member> list = new ArrayList<Member>();
 
-		String sql = "select name, date_format(birth,'%m%d') newbirth " + 
+		String sql = "select uid, name, date_format(birth,'%m%d') newbirth " + 
 				"from s_member where birth is not null " + 
 				"and  date_format(now(),'%m%d') - date_format(	birth,'%m%d') " + 
 				"between 1 and 7 order by birth";
@@ -211,7 +225,11 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				afterMembers.add(rs.getString("name")+"님/"+rs.getString("newbirth"));
+				Member m  = new Member();
+				m.setUid(rs.getString("uid"));
+				m.setName(rs.getString("name"));
+				m.setBirth(rs.getString("newbirth"));
+				list.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -225,7 +243,7 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return afterMembers;
+		return list;
 
 	}
 

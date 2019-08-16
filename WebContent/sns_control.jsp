@@ -90,13 +90,15 @@
 		ArrayList<Member> sameHobbyUserList = memberDao.getSameHobbyUsers(hobby);
 
 		//생일 관련 
-		ArrayList<String> beforMember = memberDao.getBeforeBirthMembers();
-		ArrayList<String> birthMember = memberDao.getBirthMembers();
-		ArrayList<String> afterMember = memberDao.getAfterBirthMembers();
+		ArrayList<Member> beforMember = memberDao.getBeforeBirthMembers();
+		ArrayList<Member> birthMember = memberDao.getBirthMembers();
+		ArrayList<Member> afterMember = memberDao.getAfterBirthMembers();
 		request.setAttribute("birthMember", birthMember);
 		request.setAttribute("beforMember", beforMember);
 		request.setAttribute("afterMember", afterMember);
 
+	
+			
 		//취미 리스트
 		request.setAttribute("sameHobbyUserList", sameHobbyUserList);
 		// 게시글 목록
